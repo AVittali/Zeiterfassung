@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListArbeitszeit } from './arbeitszeit/list-arbeitszeit';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/arbeitszeit', pathMatch: 'full' },
+  // { path: '', redirectTo: '/arbeitszeit', pathMatch: 'full' },
   { path: 'arbeitszeit', component: ListArbeitszeit }
 ];
 
