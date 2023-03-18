@@ -35,6 +35,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent, ListArbeitszeit]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
