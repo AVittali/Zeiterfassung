@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 /**
  * @title Basic list
@@ -8,5 +8,5 @@ import {Component} from '@angular/core';
   templateUrl: 'list-monatsuebersicht.html'
 })
 
-export class ListMonatsuebersicht  {
+export class ListMonatsuebersicht {
 }

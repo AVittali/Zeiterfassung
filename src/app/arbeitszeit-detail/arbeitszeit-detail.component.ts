@@ -5,12 +5,12 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../arbeitszeit/arbeitszeit-data.service';
-import { MatFormField } from '@angular/material/form-field'; 
+import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
   templateUrl: './arbeitszeit-detail.component.html',
-  styleUrls: [ './arbeitszeit-detail.component.css' ]
+  styleUrls: ['./arbeitszeit-detail.component.css']
 })
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit: Arbeitszeit | undefined;
@@ -19,7 +19,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private arbeitszeitService: ArbeitszeitDataService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getArbeitszeit();

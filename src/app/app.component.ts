@@ -12,5 +12,5 @@ export class AppComponent {
   title = 'Zeiterfassung';
 
   arbeitszeiten: Arbeitszeit[] = new ArbeitszeitDataService().getArbeitszeiten();
-  
+
 }

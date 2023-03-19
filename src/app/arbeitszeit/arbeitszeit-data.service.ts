@@ -8,10 +8,13 @@ import { Arbeitszeit } from './arbeitszeit';
 export class ArbeitszeitDataService {
 
   arbeitszeiten: Arbeitszeit[] = [
-    { id: 1, datum: "2023-03-07", von: "15:00", bis: "18:00", pause: 0 },
-    { id: 2, datum: "2023-03-08", von: "08:00", bis: "15:00", pause: 60 },
-    { id: 3, datum: "2023-03-09", von: "08:30", bis: "12:30", pause: 0 },
-    { id: 4, datum: "2023-03-15", von: "08:30", bis: "12:30", pause: 0 }
+    { id: 1, datum: "2023-02-06", von: "10:00", bis: "17:00", pause: 45 },
+    { id: 2, datum: "2023-02-07", von: "08:30", bis: "12:30", pause: 0 },
+    { id: 3, datum: "2023-02-14", von: "14:00", bis: "18:00", pause: 0 },
+    { id: 4, datum: "2023-03-07", von: "15:00", bis: "18:00", pause: 0 },
+    { id: 5, datum: "2023-03-08", von: "08:00", bis: "15:00", pause: 60 },
+    { id: 6, datum: "2023-03-09", von: "08:30", bis: "12:30", pause: 0 },
+    { id: 7, datum: "2023-03-15", von: "08:30", bis: "12:30", pause: 0 }
   ]
 
   constructor() { }
