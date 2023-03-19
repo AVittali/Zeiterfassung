@@ -16,16 +16,20 @@ import { TextFieldModule } from "@angular/cdk/text-field";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-detail.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, ListArbeitszeit
+    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
+//     FormsModule,
+//     ReactiveFormsModule,
 
     // Material
     MatButtonModule,

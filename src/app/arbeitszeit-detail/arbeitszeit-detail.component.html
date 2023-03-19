@@ -1,13 +1,54 @@
+<!--
 <p>Details zu {{arbeitszeit?.datum}}</p>
-
+-->
 <!--
 <div><span>id: </span>{{arbeitszeit?.id}}</div>
 -->
+<!--
 <div><span>Datum: </span>{{arbeitszeit?.datum}}</div>
 <div><span>Von: </span>{{arbeitszeit?.von}}</div>
 <div><span>Bis: </span>{{arbeitszeit?.bis}}</div>
 <div><span>Pause: </span>{{arbeitszeit?.pause}}</div>
+-->
 
+<mat-form-field>
+  <mat-label>Datum</mat-label>
+  <input matInput value="{{arbeitszeit?.datum}}">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Von</mat-label>
+  <input matInput value="{{arbeitszeit?.von}}">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Bis</mat-label>
+  <input matInput value="{{arbeitszeit?.bis}}">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Pause</mat-label>
+  <input matInput value="{{arbeitszeit?.pause}}">
+</mat-form-field>
+
+
+<!--
+<mat-form-field class="example-form-field" appearance="fill">
+  <mat-label>First campaign</mat-label>
+  <mat-date-range-input
+    [formGroup]="campaignOne"
+    [rangePicker]="campaignOnePicker"
+    [comparisonStart]="campaignTwo.value.start"
+    [comparisonEnd]="campaignTwo.value.end">
+    <input matStartDate placeholder="Start date" formControlName="start">
+    <input matEndDate placeholder="End date" formControlName="end">
+  </mat-date-range-input>
+  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+  <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+</mat-form-field>
+
+-->
 <!--
 <input id="pause" [(ngModel)]="arbeitszeit?.pause" placeholder="Pause"/>
 -->
@@ -75,6 +116,7 @@
   <button type="button" (click)="save()">save</button>
 </div>
 -->
-
-<button type="button" (click)="goBack()">zurück</button>
-<button type="button" (click)="save()">speichern</button>
+<div>
+  <button type="button" (click)="goBack()">zurück</button>
+  <button type="button" (click)="save()">speichern</button>
+</div>
