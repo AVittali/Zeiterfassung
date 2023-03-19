@@ -10,27 +10,31 @@
 <div><span>Bis: </span>{{arbeitszeit?.bis}}</div>
 <div><span>Pause: </span>{{arbeitszeit?.pause}}</div>
 -->
+<div *ngIf="arbeitszeit">
+  <mat-form-field>
+    <mat-label>Datum</mat-label>
+    <!--<input matInput value="{{arbeitszeit?.datum}}">-->
+    <input matInput id="datum" [(ngModel)]="arbeitszeit.datum" />
+  </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Datum</mat-label>
-  <input matInput value="{{arbeitszeit?.datum}}">
-</mat-form-field>
+  <mat-form-field>
+    <mat-label>Von</mat-label>
+    <!--<input matInput value="{{arbeitszeit?.von}}">-->
+    <input matInput id="von" [(ngModel)]="arbeitszeit.von" />
+  </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Von</mat-label>
-  <input matInput value="{{arbeitszeit?.von}}">
-</mat-form-field>
+  <mat-form-field>
+    <mat-label>Bis</mat-label>
+    <!--<input matInput value="{{arbeitszeit?.bis}}">-->
+    <input matInput id="bis" [(ngModel)]="arbeitszeit.bis" />
+  </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Bis</mat-label>
-  <input matInput value="{{arbeitszeit?.bis}}">
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>Pause</mat-label>
-  <input matInput value="{{arbeitszeit?.pause}}">
-</mat-form-field>
-
+  <mat-form-field>
+    <mat-label>Pause</mat-label>
+    <!--<input matInput type="number" value="{{arbeitszeit?.pause}}">-->
+    <input matInput id="pause" type="number" [(ngModel)]="arbeitszeit.pause" />
+  </mat-form-field>
+</div>
 
 <!--
 <mat-form-field class="example-form-field" appearance="fill">

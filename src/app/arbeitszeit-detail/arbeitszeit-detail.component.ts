@@ -12,6 +12,7 @@ import { MatFormField } from '@angular/material/form-field';
   templateUrl: './arbeitszeit-detail.component.html',
   styleUrls: ['./arbeitszeit-detail.component.css']
 })
+
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit: Arbeitszeit | undefined;
 
@@ -47,5 +48,10 @@ export class ArbeitszeitDetailComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
     */
+    if (this.arbeitszeit) {
+      this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit);
+    }
+    this.goBack();
+
   }
 }

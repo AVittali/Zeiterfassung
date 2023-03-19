@@ -28,7 +28,23 @@ export class ArbeitszeitDataService {
   }
 
   updateArbeitszeit(arbeitszeit: Arbeitszeit) {
-    // TODO ausprogrammieren
-    // Arbeitszeit current = this.getArbeitszeit(arbeitszeit.id);
+
+    console.log("arbeitszeit" + JSON.stringify(arbeitszeit))
+
+    var current = this.getArbeitszeit(arbeitszeit.id);
+    if (current) {
+
+      console.log("current" + JSON.stringify(current))
+
+      current.datum = arbeitszeit.datum;
+      current.von = arbeitszeit.von;
+      current.bis = arbeitszeit.bis;
+      current.pause = arbeitszeit.pause;
+
+      console.log("current" + JSON.stringify(current))
+    }
+
+    console.log("getArbeitszeit" + JSON.stringify(this.getArbeitszeit(arbeitszeit.id)))
+
   }
 }

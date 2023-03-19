@@ -17,6 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 // import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-detail.component';
 
 
@@ -28,7 +29,7 @@ import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-det
     BrowserModule,
     CommonModule,
     AppRoutingModule,
-//     FormsModule,
+     FormsModule,
 //     ReactiveFormsModule,
 
     // Material
