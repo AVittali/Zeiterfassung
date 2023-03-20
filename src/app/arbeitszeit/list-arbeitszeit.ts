@@ -20,11 +20,11 @@ export class ListArbeitszeit {
   displayedColumns: string[] = ['datum', 'von', 'bis', 'pause'];
 
   // Anzuzeigende Daten
-  arbeitszeiten: Arbeitszeit[] = new ArbeitszeitDataService().getArbeitszeiten();
+  arbeitszeiten: Arbeitszeit[] = this.arbeitszeitDataService.getArbeitszeiten();
 
   // dataSource = new MatTableDataSource(this.arbeitszeiten);
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private arbeitszeitDataService: ArbeitszeitDataService) { }
 
   // ngAfterViewInit() {}
 
