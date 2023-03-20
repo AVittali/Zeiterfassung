@@ -19,7 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 // import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormsModule} from '@angular/forms';
 import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-detail.component';
-
+import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
+// import { Injectable } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-det
     CommonModule,
     AppRoutingModule,
      FormsModule,
+//    Injectable,
 //     ReactiveFormsModule,
 
     // Material
@@ -50,7 +52,7 @@ import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-det
     }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ArbeitszeitDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
