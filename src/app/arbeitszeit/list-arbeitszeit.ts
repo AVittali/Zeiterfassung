@@ -38,4 +38,10 @@ export class ListArbeitszeit {
     this.router.navigate(['/detail/' + row.id]);
   }
 
+  create() {
+    console.log("create clicked");
+    
+    this.router.navigate(['/detail/' + 0]);
+  }
+
 }

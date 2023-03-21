@@ -89,3 +89,9 @@
    <tr mat-row (click)="navigateTo(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+
+<div mat-dialog-actions align="end">
+   <button type="button" mat-fab color="accent" (click)="create()">
+      <mat-icon>add</mat-icon>
+   </button>
+</div>
