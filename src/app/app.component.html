@@ -1,21 +1,9 @@
-<!--
-<h1>{{title}}</h1>
--->
 <div class="container">
   <mat-toolbar color="accent">
     <mat-toolbar-row>
       <span class="toolbar">{{title}}</span>
     </mat-toolbar-row>
   </mat-toolbar>
-
-
-  <!--
-<nav>
-  <a routerLink="/arbeitszeit">Arbeitszeit</a>
-  <a routerLink="/uebersicht">Übersicht</a>
-</nav>
--->
-
   <!-- TODO Wann verwendet man eckige Klammern? -->
   <nav mat-tab-nav-bar backgroundColor="primary" [tabPanel]="tabPanel">
     <a mat-tab-link href="/arbeitszeit">Arbeitszeit</a>
@@ -23,11 +11,21 @@
   </nav>
 </div>
 
-<div class="content">
-  <mat-tab-nav-panel #tabPanel>
+<!--
+<nav>
+  <a routerLink="/arbeitszeit">Arbeitszeit</a>
+  <a routerLink="/uebersicht">Übersicht</a>
+</nav>
+-->
+
+<mat-tab-nav-panel #tabPanel>
+  <div class="content">
     <router-outlet></router-outlet>
-  </mat-tab-nav-panel>
-</div>
+  </div>
+</mat-tab-nav-panel>
+
+
+
 
 <!--
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">

@@ -1,12 +1,16 @@
 span {
+    display: inline-block;
     text-align: center;
     width: 100%;
+    position: fixed;
 }
 
 .container {
     display: grid;
     text-align: center;
     grid-template-rows: auto auto 1fr;
+    // position: sticky;
+    // height: 100vh;
 }
 
 .content {
