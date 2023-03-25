@@ -1,5 +1,14 @@
 span {
-    display: inline-block;
     text-align: center;
     width: 100%;
+}
+
+.container {
+    display: grid;
+    text-align: center;
+    grid-template-rows: auto auto 1fr;
+}
+
+.content {
+    overflow: auto;
 }

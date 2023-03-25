@@ -10,7 +10,7 @@ import { MatFormField } from '@angular/material/form-field';
 @Component({
   selector: 'app-arbeitszeit-detail',
   templateUrl: './arbeitszeit-detail.component.html',
-  styleUrls: ['./arbeitszeit-detail.component.css']
+  styleUrls: ['./arbeitszeit-detail.component.scss']
 })
 
 export class ArbeitszeitDetailComponent implements OnInit {

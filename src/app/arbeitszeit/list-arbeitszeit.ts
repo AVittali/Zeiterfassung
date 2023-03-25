@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Arbeitszeit } from './arbeitszeit';
 import { ArbeitszeitDataService } from './arbeitszeit-data.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,8 @@ import { MatListModule } from '@angular/material/list';
  */
 @Component({
   selector: 'list-arbeitszeit',
-  templateUrl: 'list-arbeitszeit.html'
+  templateUrl: 'list-arbeitszeit.html',
+  styleUrls: ['./list-arbeitszeit.scss']
 })
 
 export class ListArbeitszeit {
