@@ -18,12 +18,12 @@ export class ArbeitszeitDataService {
     return this.arbeitszeiten;
   }
 
-  getArbeitszeit(id: number): Arbeitszeit | undefined {
+  getArbeitszeit(id: number): Arbeitszeit {
 
     if (id == 0)
       return new Arbeitszeit();
 
-    return this.arbeitszeiten.find(element => element.id == id);
+    return this.arbeitszeiten.find(element => element.id == id) ?? new Arbeitszeit;
   }
 
   /**
@@ -32,13 +32,13 @@ export class ArbeitszeitDataService {
    */
   updateArbeitszeit(arbeitszeit: Arbeitszeit) {
 
-    console.log("updateArbeitszeit:" + JSON.stringify(arbeitszeit))
+    console.log({ updateArbeitszeit: arbeitszeit });
+
 
     // Neuanlage
     if (!arbeitszeit.id) {
-      console.log("Neuanlage");
-      console.log(arbeitszeit);
-      
+      console.log({ neuanlage: arbeitszeit });
+
       arbeitszeit.id = this.getNextId();
       this.arbeitszeiten.push(arbeitszeit);
       this.localStorageService.setItem(this.key, JSON.stringify(this.arbeitszeiten));
@@ -48,18 +48,16 @@ export class ArbeitszeitDataService {
     // Daten aktualisieren
     var current = this.getArbeitszeit(arbeitszeit.id);
     if (current) {
-      // TODO Bringt das etwas?
-      console.log("current übertragen" + JSON.stringify(current))
+      console.log({ currentUebertragen: current });
 
       current.datum = arbeitszeit.datum;
       current.von = arbeitszeit.von;
       current.bis = arbeitszeit.bis;
       current.pause = arbeitszeit.pause;
 
-      console.log("current" + JSON.stringify(current))
     }
 
-    console.log("getArbeitszeit" + JSON.stringify(this.getArbeitszeit(arbeitszeit.id)));
+    console.log({ getArbeitszeit: this.getArbeitszeit(arbeitszeit.id) });
 
     this.localStorageService.setItem(this.key, JSON.stringify(this.arbeitszeiten));
 
@@ -87,7 +85,7 @@ export class ArbeitszeitDataService {
 
     }
 
-    var parsedValues : Arbeitszeit[] = JSON.parse(value);
+    var parsedValues: Arbeitszeit[] = JSON.parse(value);
 
     return parsedValues.sort((a, b) => a.datum.localeCompare(b.datum));
 
@@ -101,9 +99,9 @@ export class ArbeitszeitDataService {
         max = element.id
       }
     });
-  
+
     return max + 1;
-  
+
   }
 }
 

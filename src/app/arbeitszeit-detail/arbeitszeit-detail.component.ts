@@ -14,7 +14,7 @@ import { MatFormField } from '@angular/material/form-field';
 })
 
 export class ArbeitszeitDetailComponent implements OnInit {
-  arbeitszeit: Arbeitszeit | undefined;
+  arbeitszeit!: Arbeitszeit;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +31,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     console.log(this.route.snapshot.paramMap.get('id'));
 
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.arbeitszeit = { ... this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() };
+    this.arbeitszeit = { ...this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() };
     // this.arbeitszeit = this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit();
 
     console.log("Arbeitszeit mit ID " + this.arbeitszeit?.id + " einglesen");
