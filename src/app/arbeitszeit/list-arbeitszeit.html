@@ -44,7 +44,7 @@
    <!-- Datum -->
    <ng-container matColumnDef="datum">
       <th mat-header-cell *matHeaderCellDef> Datum </th>
-      <td mat-cell *matCellDef="let element"> {{element.datum}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.datum | date :'dd.MM.YYYY'}} </td>
    </ng-container>
 
    <!-- Uhrzeit von -->

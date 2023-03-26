@@ -6,24 +6,32 @@ import { BrowserModule } from '@angular/platform-browser'
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../arbeitszeit/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
   templateUrl: './arbeitszeit-detail.component.html',
-  styleUrls: ['./arbeitszeit-detail.component.scss']
+  styleUrls: ['./arbeitszeit-detail.component.css']
 })
 
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit!: Arbeitszeit;
+  filterForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private arbeitszeitService: ArbeitszeitDataService,
-    private location: Location
+    private location: Location,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.getArbeitszeit();
+
+    this.filterForm = this.formBuilder.group({
+      datum: ['', Validators.required]
+    })
+
   }
 
   getArbeitszeit(): void {
@@ -42,6 +50,11 @@ export class ArbeitszeitDetailComponent implements OnInit {
   }
 
   save(): void {
+    if (this.filterForm.invalid) {
+      console.log({ "Keine gültige Daten": this.arbeitszeit });
+      return;
+    }
+
     // TODO Ausprogrammieren
     /*
     if (this.arbeitszeit) {
@@ -49,9 +62,13 @@ export class ArbeitszeitDetailComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
     */
+
+    // Aktualisieren der Daten
     if (this.arbeitszeit) {
       this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit);
     }
+
+    // Auf Tabelle zurück
     this.goBack();
 
   }

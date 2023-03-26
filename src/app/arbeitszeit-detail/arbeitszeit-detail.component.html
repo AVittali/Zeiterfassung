@@ -11,10 +11,16 @@
 <div><span>Pause: </span>{{arbeitszeit?.pause}}</div>
 -->
 <div *ngIf="arbeitszeit">
-  <mat-form-field>
+
+  <mat-form-field appearance="fill">
     <mat-label>Datum</mat-label>
-    <!--<input matInput value="{{arbeitszeit?.datum}}">-->
-    <input matInput id="datum" [(ngModel)]="arbeitszeit.datum" />
+    <input matInput [matDatepicker]="picker3" [(ngModel)]="arbeitszeit.datum">
+    <mat-hint>DD.MM.YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+    <mat-datepicker #picker3></mat-datepicker>
+    <mat-error>
+      Gültiges Datum eingeben
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>

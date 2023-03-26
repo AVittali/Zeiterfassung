@@ -19,8 +19,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 // import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-detail.component';
 import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 // import { Injectable } from '@angular/core';
 
 @NgModule({
@@ -43,6 +47,8 @@ import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatIconModule,
     TextFieldModule,
 
