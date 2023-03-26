@@ -41,7 +41,7 @@ export class ArbeitszeitDataService {
 
       arbeitszeit.id = this.getNextId();
       this.arbeitszeiten.push(arbeitszeit);
-      this.localStorageService.setItem(this.key, JSON.stringify(this.arbeitszeiten));
+      this.localStorageService.setItem(this.key, this.arbeitszeiten);
       return;
     }
 
@@ -59,36 +59,42 @@ export class ArbeitszeitDataService {
 
     console.log({ getArbeitszeit: this.getArbeitszeit(arbeitszeit.id) });
 
-    this.localStorageService.setItem(this.key, JSON.stringify(this.arbeitszeiten));
+    this.localStorageService.setItem(this.key, this.arbeitszeiten);
 
   }
 
-  private getArbeitszeitenFromLocalStorage(): any {
+  private getArbeitszeitenFromLocalStorage(): Arbeitszeit[] {
 
-    var value = this.localStorageService.getItem(this.key);
+    console.log("Lese Local Storage ein");
+
+    const value = this.localStorageService.getItem(this.key);
     if (value === null) {
       console.log("Keine Daten im Speicher gefunden");
-
-      return [
-        { id: 1, datum: "2023-02-06", von: "10:00", bis: "17:00", pause: 45 },
-        { id: 2, datum: "2023-02-07", von: "08:30", bis: "12:30", pause: 0 },
-        { id: 3, datum: "2023-02-14", von: "14:00", bis: "18:00", pause: 0 },
-        { id: 4, datum: "2023-03-07", von: "15:00", bis: "18:00", pause: 0 },
-        { id: 5, datum: "2023-03-08", von: "08:00", bis: "15:00", pause: 60 },
-        { id: 6, datum: "2023-03-09", von: "08:30", bis: "12:30", pause: 0 },
-        { id: 7, datum: "2023-02-14", von: "14:00", bis: "18:00", pause: 0 },
-        { id: 8, datum: "2023-03-15", von: "08:00", bis: "16:00", pause: 60 },
-        { id: 9, datum: "2023-03-16", von: "08:00", bis: "12:00", pause: 0 },
-        { id: 10, datum: "2023-03-20", von: "08:30", bis: "14:30", pause: 45 },
-        { id: 11, datum: "2023-03-21", von: "08:30", bis: "15:30", pause: 60 }
-      ];
-
+      return this.createDefaultArbeitszeit();
     }
 
-    var parsedValues: Arbeitszeit[] = JSON.parse(value);
+    console.log({ getArbeitszeitenFromLocalStorage: value });
+    return value;
 
-    return parsedValues.sort((a, b) => a.datum.localeCompare(b.datum));
+  }
 
+  private createDefaultArbeitszeit() {
+    var temp = [
+      { id: 1, datum: new Date("2023-02-06"), von: "10:00", bis: "17:00", pause: 45 },
+      { id: 2, datum: new Date("2023-02-07"), von: "08:30", bis: "12:30", pause: 0 },
+      { id: 3, datum: new Date("2023-02-14"), von: "14:00", bis: "18:00", pause: 0 },
+      { id: 4, datum: new Date("2023-03-07"), von: "15:00", bis: "18:00", pause: 0 },
+      { id: 5, datum: new Date("2023-03-08"), von: "08:00", bis: "15:00", pause: 60 },
+      { id: 6, datum: new Date("2023-03-09"), von: "08:30", bis: "12:30", pause: 0 },
+      { id: 7, datum: new Date("2023-02-14"), von: "14:00", bis: "18:00", pause: 0 },
+      { id: 8, datum: new Date("2023-03-15"), von: "08:00", bis: "16:00", pause: 60 },
+      { id: 9, datum: new Date("2023-03-16"), von: "08:00", bis: "12:00", pause: 0 },
+      { id: 10, datum: new Date("2023-03-20"), von: "08:30", bis: "14:30", pause: 45 },
+      { id: 11, datum: new Date("2023-03-21"), von: "08:30", bis: "15:30", pause: 60 }
+    ];
+
+    console.log({ "Testdaten erzeugt": temp });
+    return temp;
   }
 
   getNextId(): number {

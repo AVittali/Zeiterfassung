@@ -28,4 +28,31 @@ export class LocalStorageService {
   public clear() {
     localStorage.clear();
   }
+
+  /*
+  private convertValue(value: any): any {
+    console.log("ConvertValue");
+    console.log({convertValue: value});
+    
+    console.log({type: typeof value});
+
+    const parsed = JSON.parse(value);
+    console.log({typeParsed: typeof parsed});
+    
+    if (Array.isArray(parsed)) {
+      console.log("isArray");
+    }
+
+    return value;
+  }
+
+  private mapValue(value: any, key?: string) {
+
+    if (key?.toLowerCase().endsWith('datum')) {
+      return new Date(value);
+    }
+
+    return value;
+  }
+  */
 }
