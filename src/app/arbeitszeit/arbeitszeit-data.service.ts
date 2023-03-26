@@ -74,7 +74,20 @@ export class ArbeitszeitDataService {
     }
 
     console.log({ getArbeitszeitenFromLocalStorage: value });
-    return value;
+    // if (Array.isArray(value)) {
+    //  console.log("isArray");
+    //}
+
+    // JSON.parse erzeugt kein gültiges Datum
+    let storageArbeitszeit = value as Arbeitszeit[];
+    storageArbeitszeit.forEach(e => {
+      e.datum = new Date(e.datum);
+    })
+
+    console.log({ storageArbeitszeitValue: storageArbeitszeit });
+
+    // Nach Datum absteigend sortieren
+    return storageArbeitszeit.sort((a, b) => (a.datum.getTime() - b.datum.getTime()) * -1);
 
   }
 
