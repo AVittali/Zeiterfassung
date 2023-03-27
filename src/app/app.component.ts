@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Arbeitszeit } from './arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LocalStorageService } from './local-storage.service';
 
 @Component({
@@ -27,8 +27,24 @@ export class AppComponent {
     });
   }
 */
-  
-  
+  save() {
+    console.log("In Datei speichern");
+    this.writeContents(JSON.stringify(this.arbeitszeiten), 'Arbeitszeiten' + '.json', 'text/plain');
+  }
+
+  writeContents(content: any, fileName: any, contentType: any) {
+    var a = document.createElement('a');
+    var file = new Blob([content], { type: contentType });
+    a.href = URL.createObjectURL(file);
+    a.download = fileName;
+    a.click();
+  }
+
+  load() {
+    console.log("Aus Datei laden");
+
+  }
+
 }
 
 
