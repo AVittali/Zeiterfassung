@@ -1,1 +1,17 @@
-<p>Hier entsteht eine Summierung nach Monat</p>
+<table mat-table [dataSource]="[monate]">
+
+    <!-- Monat -->
+    <ng-container matColumnDef="monat">
+        <th mat-header-cell *matHeaderCellDef> Monat </th>
+        <td mat-cell *matCellDef="let element"> {{element.monat}} </td>
+    </ng-container>
+
+    <!-- Gearbeitete Stunden -->
+    <ng-container matColumnDef="stunden">
+        <th mat-header-cell *matHeaderCellDef> Stunden </th>
+        <td mat-cell *matCellDef="let element"> {{element.stunden}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+</table>

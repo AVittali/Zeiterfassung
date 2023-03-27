@@ -23,13 +23,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-detail.component';
 import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
 
 
 // import { Injectable } from '@angular/core';
 
 @NgModule({
   declarations: [
-    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent
+    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht
   ],
   imports: [
     BrowserModule,
