@@ -1,7 +1,21 @@
 <div class="container">
+
   <mat-toolbar color="accent">
     <mat-toolbar-row>
       <span class="toolbar">{{title}}</span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>save</mat-icon>
+          <span>Daten exportieren</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>file_open</mat-icon>
+          <span>Daten importieren</span>
+        </button>
+      </mat-menu>    
     </mat-toolbar-row>
   </mat-toolbar>
   <!-- TODO Wann verwendet man eckige Klammern? -->

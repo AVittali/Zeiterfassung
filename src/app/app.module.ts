@@ -24,6 +24,7 @@ import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-det
 import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 // import { Injectable } from '@angular/core';
@@ -51,6 +52,7 @@ import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatMenuModule,
     TextFieldModule,
 
     ServiceWorkerModule.register('ngsw-worker.js', {
