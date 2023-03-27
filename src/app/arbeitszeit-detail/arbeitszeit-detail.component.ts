@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../arbeitszeit/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
@@ -29,7 +29,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     this.getArbeitszeit();
 
     this.filterForm = this.formBuilder.group({
-      datum: ['', Validators.required]
+      datum: new FormControl(['', [Validators.required]])
     })
 
   }
@@ -50,8 +50,16 @@ export class ArbeitszeitDetailComponent implements OnInit {
   }
 
   save(): void {
+
     if (this.filterForm.invalid) {
+      console.log({ filterForm: this.filterForm });
       console.log({ "Keine gültige Daten": this.arbeitszeit });
+      return;
+    }
+
+    // Leider funktioniert die obere Abfrage nicht, daher hier zur Sicherheit
+    if (this.arbeitszeit.datum === null) {
+      console.log({ "Ungültiges Datum, sollte eigentlich schon vorher abgefangen sein": this.arbeitszeit });
       return;
     }
 
