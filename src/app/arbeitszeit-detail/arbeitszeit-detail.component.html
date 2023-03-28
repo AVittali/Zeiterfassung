@@ -12,34 +12,40 @@
 -->
 <div *ngIf="arbeitszeit">
 
-  <mat-form-field appearance="fill">
-    <mat-label>Datum</mat-label>
-    <input matInput [matDatepicker]="picker3" [(ngModel)]="arbeitszeit.datum">
-    <mat-hint>DD.MM.YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-    <mat-datepicker #picker3></mat-datepicker>
-    <mat-error>
-      Gültiges Datum eingeben
-    </mat-error>
-  </mat-form-field>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Datum</mat-label>
+      <input matInput [matDatepicker]="picker3" [(ngModel)]="arbeitszeit.datum">
+      <mat-hint>DD.MM.YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+      <mat-error>
+        Gültiges Datum eingeben
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Von</mat-label>
+      <!--<input matInput value="{{arbeitszeit?.von}}">-->
+      <input matInput id="von" [(ngModel)]="arbeitszeit.von" />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Von</mat-label>
-    <!--<input matInput value="{{arbeitszeit?.von}}">-->
-    <input matInput id="von" [(ngModel)]="arbeitszeit.von" />
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Bis</mat-label>
+      <!--<input matInput value="{{arbeitszeit?.bis}}">-->
+      <input matInput id="bis" [(ngModel)]="arbeitszeit.bis" />
+      <app-time-input [(ngModel)]="arbeitszeit.bis" label="Uhrzeit"></app-time-input>
+    </mat-form-field>
+  </p>
 
-  <mat-form-field>
-    <mat-label>Bis</mat-label>
-    <!--<input matInput value="{{arbeitszeit?.bis}}">-->
-    <input matInput id="bis" [(ngModel)]="arbeitszeit.bis" />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Pause</mat-label>
-    <!--<input matInput type="number" value="{{arbeitszeit?.pause}}">-->
-    <input matInput id="pause" type="number" [(ngModel)]="arbeitszeit.pause" />
-  </mat-form-field>
+  <p>
+    <mat-form-field>
+      <mat-label>Pause</mat-label>
+      <!--<input matInput type="number" value="{{arbeitszeit?.pause}}">-->
+      <input matInput id="pause" type="number" [(ngModel)]="arbeitszeit.pause" />
+    </mat-form-field>
+  </p>
 </div>
 
 <!--
