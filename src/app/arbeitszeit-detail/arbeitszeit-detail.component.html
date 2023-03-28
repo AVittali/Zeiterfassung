@@ -27,15 +27,15 @@
   <p>
     <mat-form-field>
       <mat-label>Von</mat-label>
-      <!--<input matInput value="{{arbeitszeit?.von}}">-->
       <input matInput id="von" [(ngModel)]="arbeitszeit.von" />
+      <app-time-input [(ngModel)]="arbeitszeit.von" ngDefaultControl></app-time-input>
+      <!-- <input matInput [(ngModel)]="arbeitszeit.von" [disabled]="false" (blur)="onTouch()" /> -->
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Bis</mat-label>
-      <!--<input matInput value="{{arbeitszeit?.bis}}">-->
       <input matInput id="bis" [(ngModel)]="arbeitszeit.bis" />
-      <app-time-input [(ngModel)]="arbeitszeit.bis" label="Uhrzeit"></app-time-input>
+      <app-time-input [(ngModel)]="arbeitszeit.bis"></app-time-input>
     </mat-form-field>
   </p>
 

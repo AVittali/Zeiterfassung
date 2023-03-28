@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, Time } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser'
 
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../arbeitszeit/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
