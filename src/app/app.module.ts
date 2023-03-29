@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -65,7 +65,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
     }),
     BrowserAnimationsModule
   ],
-  providers: [ArbeitszeitDataService],
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, ArbeitszeitDataService],
   bootstrap: [AppComponent]
 })
 
