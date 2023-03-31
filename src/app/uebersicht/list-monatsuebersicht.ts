@@ -30,48 +30,28 @@ export class ListMonatsuebersicht {
     console.log("Aufbau der Monate");
     const monateMap: Map<number, Monat> = new Map();
 
-    var monat = new Monat();
-    monat.monat = 2;
-    monat.stunden = 15;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
-    monat = new Monat();
-    monat.monat = 3;
-    monat.stunden = 13;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
-    monat = new Monat();
-    monat.monat = 4;
-    monat.stunden = 3;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
-    monat = new Monat();
-    monat.monat = 5;
-    monat.stunden = 23;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
-    monat = new Monat();
-    monat.monat = 6;
-    monat.stunden = 12;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
-    monat = new Monat();
-    monat.monat = 7;
-    monat.stunden = 13;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
-    monat = new Monat();
-    monat.monat = 8;
-    monat.stunden = 14;
-    monat.tage = 1;
-    monat.jahr = 2023;
-    monateMap.set(monat.monat, monat);
+    this.arbeitszeitDataService.getArbeitszeiten().forEach(arbeitszeit => {
+
+      // TODO: Derzeit nur das Jahr 2023 möglich
+      const jahr = arbeitszeit.datum.getFullYear();
+      if (jahr === 2023) {
+        const monatValue: number = arbeitszeit.datum.getMonth();
+        console.log({ monat: monatValue });
+        if (monatValue === 0)
+        console.log({ monat0: arbeitszeit });
+
+        var current = monateMap.get(monatValue);
+        if (current == undefined) {
+          current = new Monat();
+          current.jahr = jahr;
+          current.monat = monatValue;
+          monateMap.set(current.monat, current);
+        }
+        current.tage = current.tage + 1;
+        // TODO Stunden addieren
+      }
+
+    });
 
     console.log({ monate: monateMap.values() });
     return Array.from(monateMap.values());
@@ -80,5 +60,13 @@ export class ListMonatsuebersicht {
 
   navigateTo(row: any) {
     // this.router.navigate(['/detail/' + row.id]);
+  }
+
+  formatMonat(monatValue: number): String {
+    var datum = new Date(2023, monatValue, 1);    
+    console.log({formatMonat: monatValue});
+    datum.setMonth(monatValue);
+    console.log({datum: datum});
+    return datum.toLocaleString('de',{month:'long'});
   }
 }

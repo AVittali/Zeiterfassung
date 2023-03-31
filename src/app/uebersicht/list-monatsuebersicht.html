@@ -3,7 +3,7 @@
     <!-- Monat -->
     <ng-container matColumnDef="monat">
         <th mat-header-cell *matHeaderCellDef> Monat </th>
-        <td mat-cell *matCellDef="let element"> {{element.monat }} </td>
+        <td mat-cell *matCellDef="let element"> {{formatMonat(element.monat) }} </td>
     </ng-container>
 
     <!-- Gearbeitete Tage -->
