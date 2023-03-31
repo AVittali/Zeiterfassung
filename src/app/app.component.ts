@@ -3,6 +3,7 @@ import { Arbeitszeit } from './arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LocalStorageService } from './local-storage.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ export class AppComponent {
 */
   save() {
     console.log("In Datei speichern");
-    this.writeContents(JSON.stringify(this.arbeitszeiten), 'Arbeitszeiten' + '.json', 'text/plain');
+    var fileName = "Arbeitszeiten " + format(new Date(), 'yyyy-MM-dd HH-mm') + ".json";
+    this.writeContents(JSON.stringify(this.arbeitszeiten), fileName, 'text/plain');
   }
 
   writeContents(content: any, fileName: any, contentType: any) {
