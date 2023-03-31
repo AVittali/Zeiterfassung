@@ -11,11 +11,14 @@
 <div><span>Pause: </span>{{arbeitszeit?.pause}}</div>
 -->
 <div *ngIf="arbeitszeit">
+  <!--
+  <div [formGroup]="filterForm"></div>
+-->
 
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Datum</mat-label>
-      <input matInput [matDatepicker]="picker3" [(ngModel)]="arbeitszeit.datum">
+      <input matInput [matDatepicker]="picker3" [(ngModel)]="arbeitszeit.datum" required>
       <mat-hint>DD.MM.YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
       <mat-datepicker #picker3></mat-datepicker>
@@ -27,15 +30,26 @@
   <p>
     <mat-form-field>
       <mat-label>Von</mat-label>
+      <!--
       <input matInput id="von" [(ngModel)]="arbeitszeit.von" />
       <app-time-input [(ngModel)]="arbeitszeit.von" ngDefaultControl></app-time-input>
+      -->
+      <!--
+      <appTimeInput matInput id="von" [(ngModel)]="arbeitszeit.von" ngDefaultControl/>
+      -->
+      <input matInput id="von" appTimeInput [(ngModel)]="arbeitszeit.von" required />
+      <!--<appTimeInput [(ngModel)]="arbeitszeit.von" ngDefaultControl></appTimeInput>-->
       <!-- <input matInput [(ngModel)]="arbeitszeit.von" [disabled]="false" (blur)="onTouch()" /> -->
+      
     </mat-form-field>
-
     <mat-form-field>
       <mat-label>Bis</mat-label>
+      <!--
       <input matInput id="bis" [(ngModel)]="arbeitszeit.bis" />
-      <app-time-input [(ngModel)]="arbeitszeit.bis"></app-time-input>
+      <app-time-input [(ngModel)]="arbeitszeit.bis" ngDefaultControl></app-time-input>
+      -->
+      <input matInput appTimeInput [(ngModel)]="arbeitszeit.bis" required />
+      <!--<input appTimeInput [(ngModel)]="arbeitszeit.bis">-->
     </mat-form-field>
   </p>
 
@@ -134,5 +148,6 @@
 -->
 <div>
   <button type="button" (click)="goBack()">zurück</button>
-  <button type="button" (click)="save()">speichern</button>
+  <!-- TODO Disabled funktioniert nicht -->
+  <button type="button" [disabled]="!filterForm.valid" (click)="save()">speichern</button>
 </div>
