@@ -16,7 +16,12 @@ import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators }
 
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit!: Arbeitszeit;
-  filterForm!: FormGroup;
+  detailsForm = this.formBuilder.group({
+    datum: ['', Validators.required],
+    von: ['', Validators.required],
+    bis: ['', Validators.required],
+    pause: ['']
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -27,11 +32,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArbeitszeit();
-
-    this.filterForm = this.formBuilder.group({
-      datum: new FormControl(['', [Validators.required]])
-    })
-
+    // this.detailsForm.setValue(this.arbeitszeit);
   }
 
   getArbeitszeit(): void {
@@ -51,8 +52,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
   save(): void {
 
-    if (this.filterForm.invalid) {
-      console.log({ filterForm: this.filterForm });
+    if (!this.detailsForm.valid) {
+      console.log({ filterForm: this.detailsForm });
       console.log({ "Keine gültige Daten": this.arbeitszeit });
       return;
     }
@@ -78,6 +79,12 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
     // Auf Tabelle zurück
     this.goBack();
+
+  }
+
+  setValue() {
+    // this.detailsForm.setValue({datum: this.arbeitszeit.datum, von: this.arbeitszeit.von, bis: this.arbeitszeit.bis, pause: this.arbeitszeit.pause});
+    console.log("setValue");
 
   }
 }
