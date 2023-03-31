@@ -1,30 +1,47 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-
-@Component({
-  selector: 'app-time-input',
-  templateUrl: 'time-input.component.html',
-  // styleUrls: ['./time-input.component.scss'],
+import { Directive, ElementRef, forwardRef, HostListener, inject, Input } from '@angular/core';
+import { ControlValueAccessor, ControlContainer, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
+@Directive({
+  selector: 'input[appTimeInput]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TimeInputComponent),
+      useExisting: forwardRef(() => TimeInputDirective),
       multi: true
     }
   ]
+
 })
 
-export class TimeInputComponent implements ControlValueAccessor {
-  @Input() label!: string;
+export class TimeInputDirective implements ControlValueAccessor {
+
+  private readonly control?= inject(ControlContainer, { optional: true, self: true });
+
   value: string = "";
   disabled: boolean = false;
   onChange: any = () => { };
   onTouch: any = () => { };
-  
+
+  constructor(
+    private readonly elementRef: ElementRef<HTMLInputElement>
+  ) { }
+
+  @HostListener('blur', ['$event'])
+  onBlur(event: FocusEvent) {
+    console.log({ "onBlur": event });
+  }
+
+  @HostListener('input', ['$event.target.value'])
+  onInput(value: any) {
+    console.log({ onInput: value });
+    // here we cut any non numerical symbols    
+    // this.value = value.replace(/[^\d.-]/g, '');
+  }
 
   writeValue(value: any) {
 
     console.log({ writeValueInput: value });
+    // this.onChange("test")
 
     if (value !== undefined) {
 
@@ -56,13 +73,5 @@ export class TimeInputComponent implements ControlValueAccessor {
     console.log("setDisabledState");
     this.disabled = isDisabled;
   }
-
-  /*
-  validate() {
-    console.log("validate");
-    
-    this.onChange(this.value);
-  }
-  */
 
 }

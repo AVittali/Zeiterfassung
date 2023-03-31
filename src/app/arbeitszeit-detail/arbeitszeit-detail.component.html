@@ -1,17 +1,6 @@
-<!--
-<p>Details zu {{arbeitszeit?.datum}}</p>
--->
-<!--
-<div><span>id: </span>{{arbeitszeit?.id}}</div>
--->
-<!--
-<div><span>Datum: </span>{{arbeitszeit?.datum}}</div>
-<div><span>Von: </span>{{arbeitszeit?.von}}</div>
-<div><span>Bis: </span>{{arbeitszeit?.bis}}</div>
-<div><span>Pause: </span>{{arbeitszeit?.pause}}</div>
--->
 <div *ngIf="arbeitszeit">
 
+  <!-- Datum -->
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Datum</mat-label>
@@ -24,25 +13,24 @@
       </mat-error>
     </mat-form-field>
   </p>
+
+  <!-- Arbeitszeit von/bis -->
   <p>
     <mat-form-field>
       <mat-label>Von</mat-label>
-      <input matInput id="von" [(ngModel)]="arbeitszeit.von" />
-      <app-time-input [(ngModel)]="arbeitszeit.von" ngDefaultControl></app-time-input>
-      <!-- <input matInput [(ngModel)]="arbeitszeit.von" [disabled]="false" (blur)="onTouch()" /> -->
+      <input matInput id="von" appTimeInput [(ngModel)]="arbeitszeit.von" required />
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Bis</mat-label>
-      <input matInput id="bis" [(ngModel)]="arbeitszeit.bis" />
-      <app-time-input [(ngModel)]="arbeitszeit.bis"></app-time-input>
+      <input matInput appTimeInput [(ngModel)]="arbeitszeit.bis" required />
     </mat-form-field>
   </p>
 
+  <!-- Pause -->
   <p>
     <mat-form-field>
       <mat-label>Pause</mat-label>
-      <!--<input matInput type="number" value="{{arbeitszeit?.pause}}">-->
       <input matInput id="pause" type="number" [(ngModel)]="arbeitszeit.pause" />
     </mat-form-field>
   </p>
@@ -134,5 +122,6 @@
 -->
 <div>
   <button type="button" (click)="goBack()">zurück</button>
-  <button type="button" (click)="save()">speichern</button>
+    <!-- TODO Disabled funktioniert nicht -->
+    <button type="button" [disabled]="!filterForm.valid" (click)="save()">speichern</button>
 </div>
