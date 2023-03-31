@@ -1,9 +1,15 @@
-<table mat-table [dataSource]="[monate]">
+<table mat-table [dataSource]="monate">
 
     <!-- Monat -->
     <ng-container matColumnDef="monat">
         <th mat-header-cell *matHeaderCellDef> Monat </th>
-        <td mat-cell *matCellDef="let element"> {{element.monat}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.monat }} </td>
+    </ng-container>
+
+    <!-- Gearbeitete Tage -->
+    <ng-container matColumnDef="tage">
+        <th mat-header-cell *matHeaderCellDef> Tage </th>
+        <td mat-cell *matCellDef="let element"> {{element.tage}} </td>
     </ng-container>
 
     <!-- Gearbeitete Stunden -->
@@ -13,5 +19,6 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
