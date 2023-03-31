@@ -55,7 +55,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
     if (!this.detailsForm.valid) {
       console.log({ filterForm: this.detailsForm });
       console.log({ "Keine gültige Daten": this.arbeitszeit });
-      return;
+      // TODO Eingentlich muss hier abgebrochen werden.
+      // return;
     }
 
     // Leider funktioniert die obere Abfrage nicht, daher hier zur Sicherheit
@@ -63,14 +64,6 @@ export class ArbeitszeitDetailComponent implements OnInit {
       console.log({ "Ungültiges Datum, sollte eigentlich schon vorher abgefangen sein": this.arbeitszeit });
       return;
     }
-
-    // TODO Ausprogrammieren
-    /*
-    if (this.arbeitszeit) {
-      this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit)
-        .subscribe(() => this.goBack());
-    }
-    */
 
     // Aktualisieren der Daten
     if (this.arbeitszeit) {
@@ -83,8 +76,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
   }
 
   setValue() {
+    // TODO Wird diese Methode wirklich benötigt?
     // this.detailsForm.setValue({datum: this.arbeitszeit.datum, von: this.arbeitszeit.von, bis: this.arbeitszeit.bis, pause: this.arbeitszeit.pause});
     console.log("setValue");
-
   }
 }
