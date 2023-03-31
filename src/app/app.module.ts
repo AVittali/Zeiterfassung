@@ -25,7 +25,7 @@ import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
 import { MatMenuModule } from '@angular/material/menu';
-import { TimeInputComponent } from './component/time-input.component';
+import { TimeInputDirective } from './component/time-input.component';
 import { MatFormFieldControl } from '@angular/material/form-field';
 
 
@@ -33,7 +33,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
-    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht, TimeInputComponent
+    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht, TimeInputDirective
   ],
   imports: [
     BrowserModule,
