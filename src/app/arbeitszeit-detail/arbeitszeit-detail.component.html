@@ -6,7 +6,7 @@
     <p>
       <mat-form-field appearance="fill">
         <mat-label>Datum</mat-label>
-        <input matInput [matDatepicker]="picker3" formControlName="datum" [(ngModel)]="arbeitszeit.datum">
+        <input matInput [matDatepicker]="picker3" formControlName="datum">
         <mat-hint>DD.MM.YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
         <mat-datepicker #picker3></mat-datepicker>
@@ -20,24 +20,35 @@
     <p>
       <mat-form-field>
         <mat-label>Von</mat-label>
-        <input matInput appTimeInput formControlName="von" value="{{ arbeitszeit.von }}" />
+        <input matInput appTimeInput formControlName="von">
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Bis</mat-label>
-        <input appTimeInput matInput formControlName="bis" value="{{ arbeitszeit.bis }}" />
+        <input matInput appTimeInput formControlName="bis">
       </mat-form-field>
+      <!--
+      <input appTimeInput formControlName="von">
+      <input appTimeInput formControlName="bis">
+      -->
+      <!--
+      <mat-form-field appearance="fill">
+        <mat-label>Phone number</mat-label>
+        <appTimeInput formControlName="von" required></appTimeInput>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-hint>Include area code</mat-hint>
+      </mat-form-field>
+      -->
     </p>
 
     <!-- Pause -->
     <p>
       <mat-form-field>
         <mat-label>Pause</mat-label>
-        <input matInput id="pause" type="number" formControlName="pause" [(ngModel)]="arbeitszeit.pause" />
+        <input matInput id="pause" type="number" formControlName="pause"/>
       </mat-form-field>
     </p>
   </div>
-
 
 </form>
 

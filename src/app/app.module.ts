@@ -33,7 +33,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
-    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht, TimeInputDirective
+    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,8 @@ import { MatFormFieldControl } from '@angular/material/form-field';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TimeInputDirective
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }, ArbeitszeitDataService],
   bootstrap: [AppComponent]

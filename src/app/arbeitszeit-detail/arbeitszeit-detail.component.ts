@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location, Time } from '@angular/common';
+import { formatDate, Location, Time } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser'
 
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
@@ -17,10 +17,10 @@ import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators }
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit!: Arbeitszeit;
   detailsForm = this.formBuilder.group({
-    datum: ['', Validators.required],
+    datum: [new Date(), Validators.required],
     von: ['', Validators.required],
     bis: ['', Validators.required],
-    pause: ['']
+    pause: [0]
   });
 
   constructor(
@@ -32,7 +32,14 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArbeitszeit();
-    // this.detailsForm.setValue(this.arbeitszeit);
+    console.log({ init: this.detailsForm.get("von")?.value });
+
+    this.detailsForm.patchValue({
+      datum: this.arbeitszeit.datum,
+      von: this.arbeitszeit.von,
+      bis: this.arbeitszeit.bis,
+      pause: this.arbeitszeit.pause,
+    });
   }
 
   getArbeitszeit(): void {
@@ -59,6 +66,28 @@ export class ArbeitszeitDetailComponent implements OnInit {
       // return;
     }
 
+    console.log({datum: this.detailsForm.get("datum")?.value}); 
+    console.log({von: this.detailsForm.get("von")?.value}); // ""
+    console.log({bis: this.detailsForm.get("bis")?.value}); // ""
+    console.log({pause: this.detailsForm.get("pause")?.value}); // Korrekter Wert
+    if (this.detailsForm.get("datum")?.value === null) {
+      return;
+    }
+
+    // TODO Keine Ahnung was hier tue
+    console.log({values : this.detailsForm.value});
+    
+    const values = this.detailsForm.value;
+    if (values.datum == null || values.von == null || values.bis == null || values.pause == null) {
+      return;
+    }
+
+    this.arbeitszeit.datum = values.datum;
+    this.arbeitszeit.von = values.von;
+    this.arbeitszeit.bis = values.bis;
+    this.arbeitszeit.pause = values.pause;
+    console.log({arbeitszeit : this.arbeitszeit});
+    
     // Leider funktioniert die obere Abfrage nicht, daher hier zur Sicherheit
     if (this.arbeitszeit.datum === null) {
       console.log({ "Ungültiges Datum, sollte eigentlich schon vorher abgefangen sein": this.arbeitszeit });
@@ -67,17 +96,12 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
     // Aktualisieren der Daten
     if (this.arbeitszeit) {
-      this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit);
+      // this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit);
     }
 
     // Auf Tabelle zurück
-    this.goBack();
+    // this.goBack();
 
   }
 
-  setValue() {
-    // TODO Wird diese Methode wirklich benötigt?
-    // this.detailsForm.setValue({datum: this.arbeitszeit.datum, von: this.arbeitszeit.von, bis: this.arbeitszeit.bis, pause: this.arbeitszeit.pause});
-    console.log("setValue");
-  }
 }
