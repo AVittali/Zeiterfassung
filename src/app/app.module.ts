@@ -41,7 +41,6 @@ import { MatFormFieldControl } from '@angular/material/form-field';
     AppRoutingModule,
     //    Injectable,
     ReactiveFormsModule,
-    FormsModule,
 
     // Material
     MatButtonModule,

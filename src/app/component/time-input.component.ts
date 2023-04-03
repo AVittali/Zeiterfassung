@@ -36,16 +36,15 @@ export class TimeInputDirective implements ControlValueAccessor {
     console.log({ "onBlur": event });
   }
 
-  /*
-  @HostListener('input', ['$event.target.value'])
-  onInput(value: any) {
-    console.log({ onInput: value });
-    // here we cut any non numerical symbols    
-    // this.value = value.replace(/[^\d.-]/g, '');
+  @HostListener('input', ['$event.target'])
+  public onInput(target: HTMLInputElement) {
+    console.log({ onInput: target });
+    this.onChange?.(target.value);
+    this.onTouched?.();
+    this.setInputViewDateValue(target.value);
   }
-  */
 
-  writeValue(value: any) {
+  public writeValue(value: any) {
 
     console.log({ writeValueInput: value });
 
@@ -82,11 +81,11 @@ export class TimeInputDirective implements ControlValueAccessor {
 
   private setInputViewDateValue(date: any) {
     if (date instanceof Date) {
-        this.elementRef.nativeElement.value = format(date, 'dd.MM.yyyy');
+      this.elementRef.nativeElement.value = format(date, 'dd.MM.yyyy');
     } else {
-        this.elementRef.nativeElement.value = date;
+      this.elementRef.nativeElement.value = date;
     }
-}
+  }
 
 }
 
