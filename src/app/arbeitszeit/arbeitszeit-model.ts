@@ -1,6 +1,6 @@
 export interface ArbeitszeitModel {
 
-    id: number,
+    id: String,
     datum: Date,
     von: string,
     bis: string,

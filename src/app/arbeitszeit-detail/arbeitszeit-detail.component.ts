@@ -42,13 +42,19 @@ export class ArbeitszeitDetailComponent implements OnInit {
     });
   }
 
-  getArbeitszeit(): void {
+  private getArbeitszeit(): void {
 
-    console.log(this.route.snapshot.paramMap.get('id'));
+    var id = this.route.snapshot.paramMap.get("id");
+    console.log({ id: id });
 
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.arbeitszeit = { ...this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() };
-    // this.arbeitszeit = this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit();
+    if (id == null) {
+      this.arbeitszeit = new Arbeitszeit();
+      return;
+    }
+
+    // Durch die Verwendung von ReactiveForm ist dies nicht mehr notwendig.
+    // this.arbeitszeit = { ...this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() };
+    this.arbeitszeit = this.arbeitszeitService.getArbeitszeit(id);
 
     console.log("Arbeitszeit mit ID " + this.arbeitszeit?.id + " einglesen");
   }
@@ -66,28 +72,28 @@ export class ArbeitszeitDetailComponent implements OnInit {
       // return;
     }
 
-    console.log({datum: this.detailsForm.get("datum")?.value}); 
-    console.log({von: this.detailsForm.get("von")?.value}); // ""
-    console.log({bis: this.detailsForm.get("bis")?.value}); // ""
-    console.log({pause: this.detailsForm.get("pause")?.value}); // Korrekter Wert
+    console.log({ datum: this.detailsForm.get("datum")?.value });
+    console.log({ von: this.detailsForm.get("von")?.value }); // ""
+    console.log({ bis: this.detailsForm.get("bis")?.value }); // ""
+    console.log({ pause: this.detailsForm.get("pause")?.value }); // Korrekter Wert
     if (this.detailsForm.get("datum")?.value === null) {
       return;
     }
 
     // TODO Keine Ahnung was hier tue
-    console.log({values : this.detailsForm.value});
-    
-    const values = this.detailsForm.value;
-    if (values.datum == null || values.von == null || values.bis == null || values.pause == null) {
+    console.log({ values: this.detailsForm.value });
+
+    const { datum, von, bis, pause } = this.detailsForm.value;
+    if (datum == null || von == null || bis == null || pause == null) {
       return;
     }
 
-    this.arbeitszeit.datum = values.datum;
-    this.arbeitszeit.von = values.von;
-    this.arbeitszeit.bis = values.bis;
-    this.arbeitszeit.pause = values.pause;
-    console.log({arbeitszeit : this.arbeitszeit});
-    
+    this.arbeitszeit.datum = datum;
+    this.arbeitszeit.von = von;
+    this.arbeitszeit.bis = bis;
+    this.arbeitszeit.pause = pause;
+    console.log({ arbeitszeit: this.arbeitszeit });
+
     // Leider funktioniert die obere Abfrage nicht, daher hier zur Sicherheit
     if (this.arbeitszeit.datum === null) {
       console.log({ "Ungültiges Datum, sollte eigentlich schon vorher abgefangen sein": this.arbeitszeit });
@@ -96,7 +102,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
     // Aktualisieren der Daten
     if (this.arbeitszeit) {
-      // this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit);
+      this.arbeitszeitService.updateArbeitszeit(this.arbeitszeit);
     }
 
     // Auf Tabelle zurück

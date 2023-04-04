@@ -2,6 +2,8 @@ import { NgFor } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../local-storage.service';
 import { Arbeitszeit } from './arbeitszeit';
+import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,11 @@ export class ArbeitszeitDataService {
     return this.arbeitszeiten;
   }
 
-  getArbeitszeit(id: number): Arbeitszeit {
+  public getArbeitszeit(id: String): Arbeitszeit {
 
-    if (id == 0)
+    console.log({"Lese Arbeitszeit":id});
+    
+    if (id === "")
       return new Arbeitszeit();
 
     return this.arbeitszeiten.find(element => element.id == id) ?? new Arbeitszeit;
@@ -39,7 +43,7 @@ export class ArbeitszeitDataService {
     if (!arbeitszeit.id) {
       console.log({ neuanlage: arbeitszeit });
 
-      arbeitszeit.id = this.getNextId();
+      arbeitszeit.id = uuidv4();
       this.arbeitszeiten.push(arbeitszeit);
       this.localStorageService.setItem(this.key, this.arbeitszeiten);
       return;
@@ -91,37 +95,28 @@ export class ArbeitszeitDataService {
 
   }
 
-  private createDefaultArbeitszeit() {
-    var temp = [
-      { id: 1, datum: new Date("2023-02-06"), von: "10:00", bis: "17:00", pause: 45 },
-      { id: 2, datum: new Date("2023-02-07"), von: "08:30", bis: "12:30", pause: 0 },
-      { id: 3, datum: new Date("2023-02-14"), von: "14:00", bis: "18:00", pause: 0 },
-      { id: 4, datum: new Date("2023-03-07"), von: "15:00", bis: "18:00", pause: 0 },
-      { id: 5, datum: new Date("2023-03-08"), von: "08:00", bis: "15:00", pause: 60 },
-      { id: 6, datum: new Date("2023-03-09"), von: "08:30", bis: "12:30", pause: 0 },
-      { id: 7, datum: new Date("2023-02-14"), von: "14:00", bis: "18:00", pause: 0 },
-      { id: 8, datum: new Date("2023-03-15"), von: "08:00", bis: "16:00", pause: 60 },
-      { id: 9, datum: new Date("2023-03-16"), von: "08:00", bis: "12:00", pause: 0 },
-      { id: 10, datum: new Date("2023-03-20"), von: "08:30", bis: "14:30", pause: 45 },
-      { id: 11, datum: new Date("2023-03-21"), von: "08:30", bis: "15:30", pause: 60 }
-    ];
+  private createDefaultArbeitszeit(): Arbeitszeit[] {
+
+    var temp = new Array;
+    var arbeitszeit = new Arbeitszeit();
+    temp.push({ id: "1", datum: new Date("2023-02-06"), von: "10:00", bis: "17:00", pause: 45 });
+    temp.push({ id: "1", datum: new Date("2023-02-06"), von: "10:00", bis: "17:00", pause: 45 });
+    temp.push({ id: "2", datum: new Date("2023-02-07"), von: "08:30", bis: "12:30", pause: 0 });
+    temp.push({ id: "3", datum: new Date("2023-02-14"), von: "14:00", bis: "18:00", pause: 0 });
+    temp.push({ id: "4", datum: new Date("2023-03-07"), von: "15:00", bis: "18:00", pause: 0 });
+    temp.push({ id: "5", datum: new Date("2023-03-08"), von: "08:00", bis: "15:00", pause: 60 });
+    temp.push({ id: "6", datum: new Date("2023-03-09"), von: "08:30", bis: "12:30", pause: 0 });
+    temp.push({ id: "7", datum: new Date("2023-02-14"), von: "14:00", bis: "18:00", pause: 0 });
+    temp.push({ id: "8", datum: new Date("2023-03-15"), von: "08:00", bis: "16:00", pause: 60 });
+    temp.push({ id: "9", datum: new Date("2023-03-16"), von: "08:00", bis: "12:00", pause: 0 });
+    temp.push({ id: "10", datum: new Date("2023-03-20"), von: "08:30", bis: "14:30", pause: 45 });
+    temp.push({ id: "11", datum: new Date("2023-03-21"), von: "08:30", bis: "15:30", pause: 60 });
+    temp.push(arbeitszeit);
 
     console.log({ "Testdaten erzeugt": temp });
     return temp;
   }
 
-  getNextId(): number {
-
-    var max: number = 0;
-    this.arbeitszeiten.forEach(element => {
-      if (max < element.id) {
-        max = element.id
-      }
-    });
-
-    return max + 1;
-
-  }
 }
 
 

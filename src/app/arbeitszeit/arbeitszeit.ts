@@ -2,7 +2,7 @@ import { ArbeitszeitModel } from "./arbeitszeit-model"
 
 export class Arbeitszeit implements ArbeitszeitModel {
 
-    public id!: number;
+    public id!: string;
     public datum!: Date;
     public von!: string;
     public bis!: string;
@@ -12,8 +12,15 @@ export class Arbeitszeit implements ArbeitszeitModel {
     // Error: src/app/arbeitszeit-detail/arbeitszeit-detail.component.ts:34:5 - error TS2741: Property 'getNettoArbeitszeit' is missing in type 
     // '{ id: number; datum: string; von: string; bis: string; pause: number; }' but required in type 'Arbeitszeit'
     // this.arbeitszeit = { ... this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() }; // Compilefehler
-    //getNettoArbeitszeit() : number {
-    //    return this.pause;
-    //}
+    // public getNettoArbeitszeit() : number {
+    //     return this.pause;
+    // }
+    
+    //constructor(id: string, datum: Date, von: string, bis: string, pause: number) { }
+
+    public getNettoArbeitszeit(): number {
+        // TODO Ausprogrammieren
+        return 0;
+    }
 
 }
