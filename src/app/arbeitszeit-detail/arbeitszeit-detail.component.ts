@@ -36,8 +36,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
     this.detailsForm.patchValue({
       datum: this.arbeitszeit.datum,
-      von: this.arbeitszeit.von,
-      bis: this.arbeitszeit.bis,
+      von: this.arbeitszeit.von ? this.arbeitszeit.von : "",
+      bis: this.arbeitszeit.bis ? this.arbeitszeit.bis : "",
       pause: this.arbeitszeit.pause,
     });
   }
