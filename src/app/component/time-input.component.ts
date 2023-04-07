@@ -6,6 +6,7 @@ import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/mate
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { format } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
+import { TimeFunctions } from '../api/time-functions';
 
 @Directive({
   selector: 'input[appTimeInput]',
@@ -26,7 +27,7 @@ export class TimeInputDirective implements ControlValueAccessor {
   @HostBinding('attr.disabled')
   protected disabled?: boolean;
 
-  private value = "";
+  private zeitValue : number = 0;
 
   constructor(private readonly elementRef: ElementRef<HTMLInputElement>) { }
 
@@ -45,18 +46,24 @@ export class TimeInputDirective implements ControlValueAccessor {
       return;
     }
 
-    var value: number = Number.parseInt(inputValue.replace(":", ""));
-    console.log({ numberValue: value });
-    if (value < 100) {
-      value = value * 100;
+    var numberValue: number = Number.parseInt(inputValue.replace(":", ""));
+    console.log({ numberValue: numberValue });
+    if (numberValue < 100) {
+      numberValue = numberValue * 100;
     }
 
-    var stunden = Math.floor(value / 100);
-    var minuten = value % 100;
+    var stunden = Math.floor(numberValue / 100);
+    var minuten = numberValue % 100;
     var outputValue = this.formatNumber(stunden) + ":" + this.formatNumber(minuten);
     console.log({ outputValue: outputValue });
+    this.zeitValue = numberValue;
+    console.log({ zeitValue: this.zeitValue });
 
     this.setInputViewDateValue(outputValue);
+    this.onChange?.(numberValue);
+    // this.setInputViewDateValue(numberValue);
+    // this.writeValue(outputValue);
+    // this.writeValue(numberValue);
   }
 
   @HostListener('input', ['$event.target'])
@@ -75,6 +82,7 @@ export class TimeInputDirective implements ControlValueAccessor {
     this.onChange?.(newValue);
     this.onTouched?.();
     this.setInputViewDateValue(newValue);
+    // this.writeValue(newValue);
   }
 
   public writeValue(value: any) {
@@ -82,7 +90,7 @@ export class TimeInputDirective implements ControlValueAccessor {
     if (value == 0) {
       this.setInputViewDateValue("");
     } else {
-      this.setInputViewDateValue(value);
+      this.setInputViewDateValue(TimeFunctions.formatZeit(value));
     }
     
   }

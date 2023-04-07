@@ -72,18 +72,18 @@ export class ArbeitszeitDetailComponent implements OnInit {
       // return;
     }
 
-    console.log({ datum: this.detailsForm.get("datum")?.value });
-    console.log({ von: this.detailsForm.get("von")?.value }); // ""
-    console.log({ bis: this.detailsForm.get("bis")?.value }); // ""
-    console.log({ pause: this.detailsForm.get("pause")?.value }); // Korrekter Wert
-    if (this.detailsForm.get("datum")?.value === null) {
-      return;
-    }
-
     const { datum, von, bis, pause } = this.detailsForm.value;
+    // const von = this.detailsForm.controls.von.zeitvalue;
+    // const bis = this.detailsForm.controls.bis.value;
     if (datum == null || von == null || bis == null || pause == null) {
       return;
     }
+
+    console.log({ datum: datum });
+    console.log({ von: von });
+    console.log({ bis: bis });
+    console.log({ pause: pause });
+    console.log({form: this.detailsForm});   
 
     this.arbeitszeit.datum = datum;
     this.arbeitszeit.von = von;
