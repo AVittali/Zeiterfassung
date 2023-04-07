@@ -32,7 +32,31 @@ export class TimeInputDirective implements ControlValueAccessor {
 
   @HostListener('blur', ['$event.target'])
   protected onInputChange(target: HTMLInputElement) {
-    console.log({ "onBlur": event });
+    console.log({ "onBlur": target.value });
+
+    var inputValue = target.value;
+    if (inputValue == null) {
+      return;
+    }
+
+    console.log({ "inputValue": inputValue });
+    if (inputValue == "") {
+      this.setInputViewDateValue("");
+      return;
+    }
+
+    var value: number = Number.parseInt(inputValue.replace(":", ""));
+    console.log({ numberValue: value });
+    if (value < 100) {
+      value = value * 100;
+    }
+
+    var stunden = Math.floor(value / 100);
+    var minuten = value % 100;
+    var outputValue = this.formatNumber(stunden) + ":" + this.formatNumber(minuten);
+    console.log({ outputValue: outputValue });
+
+    this.setInputViewDateValue(outputValue);
   }
 
   @HostListener('input', ['$event.target'])
@@ -46,6 +70,8 @@ export class TimeInputDirective implements ControlValueAccessor {
     // Maximallänge 5 Zeichen
     newValue = newValue.substring(0, 5);
 
+    console.log(({ newValue: newValue }));
+
     this.onChange?.(newValue);
     this.onTouched?.();
     this.setInputViewDateValue(newValue);
@@ -53,6 +79,12 @@ export class TimeInputDirective implements ControlValueAccessor {
 
   public writeValue(value: any) {
     console.log("writeValue");
+    if (value == 0) {
+      this.setInputViewDateValue("");
+    } else {
+      this.setInputViewDateValue(value);
+    }
+    
   }
 
   public registerOnChange(fn: any): void {
@@ -70,16 +102,20 @@ export class TimeInputDirective implements ControlValueAccessor {
     this.disabled = isDisabled ? isDisabled : undefined;
   }
 
-  private setInputViewDateValue(date: any) {
-    console.log({ setInputViewDateValue: date });
+  private setInputViewDateValue(inputValue: any) {
+    console.log({ setInputViewDateValue: inputValue });
 
-    if (date instanceof Date) {
-      this.elementRef.nativeElement.value = format(date, 'dd.MM.yyyy');
-    } else {
-      this.elementRef.nativeElement.value = date;
-    }
+    this.elementRef.nativeElement.value = inputValue;
     console.log({ nativeElement: this.elementRef.nativeElement.value });
 
+  }
+
+  private formatNumber(number: number): String {
+    if (number < 10) {
+      return "0" + number;
+    }
+
+    return number + "";
   }
 
 }

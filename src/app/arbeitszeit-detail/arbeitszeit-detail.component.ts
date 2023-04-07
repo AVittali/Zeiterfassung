@@ -18,8 +18,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit!: Arbeitszeit;
   detailsForm = this.formBuilder.group({
     datum: [new Date(), Validators.required],
-    von: ['', Validators.required],
-    bis: ['', Validators.required],
+    von: [0, Validators.required],
+    bis: [0, Validators.required],
     pause: [0]
   });
 
@@ -32,12 +32,12 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getArbeitszeit();
-    console.log({ init: this.detailsForm.get("von")?.value });
+    //console.log({ init: this.detailsForm.get("von")?.value });
 
     this.detailsForm.patchValue({
       datum: this.arbeitszeit.datum,
-      von: this.arbeitszeit.von ? this.arbeitszeit.von : "",
-      bis: this.arbeitszeit.bis ? this.arbeitszeit.bis : "",
+      von: this.arbeitszeit.von ? this.arbeitszeit.von : 0,
+      bis: this.arbeitszeit.bis ? this.arbeitszeit.bis : 0,
       pause: this.arbeitszeit.pause,
     });
   }
@@ -56,7 +56,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     // this.arbeitszeit = { ...this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() };
     this.arbeitszeit = this.arbeitszeitService.getArbeitszeit(id);
 
-    console.log("Arbeitszeit mit ID " + this.arbeitszeit?.id + " einglesen");
+    console.log({"Arbeitszeit eingelesen" : this.arbeitszeit});
   }
 
   goBack(): void {
@@ -79,9 +79,6 @@ export class ArbeitszeitDetailComponent implements OnInit {
     if (this.detailsForm.get("datum")?.value === null) {
       return;
     }
-
-    // TODO Keine Ahnung was hier tue
-    console.log({ values: this.detailsForm.value });
 
     const { datum, von, bis, pause } = this.detailsForm.value;
     if (datum == null || von == null || bis == null || pause == null) {
@@ -106,7 +103,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     }
 
     // Auf Tabelle zurück
-    // this.goBack();
+    this.goBack();
 
   }
 

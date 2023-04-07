@@ -2,8 +2,8 @@ export interface ArbeitszeitModel {
 
     id: String,
     datum: Date,
-    von: string,
-    bis: string,
+    von: number,
+    bis: number,
     pause: number
 
 }

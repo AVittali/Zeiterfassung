@@ -45,19 +45,19 @@
    <ng-container matColumnDef="datum">
       <th mat-header-cell *matHeaderCellDef> Datum </th>
       <!-- TODO Wieso geht das Datum nicht anders?-->
-      <td mat-cell *matCellDef="let element"> {{element.datum | date: 'dd.MM.yyyy ': '+0200' : 'en-ZA'}} </td>
+      <td mat-cell *matCellDef="let element"> {{formatDatum(element.datum)}}</td>
    </ng-container>
 
    <!-- Uhrzeit von -->
    <ng-container matColumnDef="von">
       <th mat-header-cell *matHeaderCellDef> Von </th>
-      <td mat-cell *matCellDef="let element"> {{element.von}} </td>
+      <td mat-cell *matCellDef="let element"> {{formatZeit(element.von)}} </td>
    </ng-container>
 
    <!-- Weight Column -->
    <ng-container matColumnDef="bis">
       <th mat-header-cell *matHeaderCellDef> Bis </th>
-      <td mat-cell *matCellDef="let element"> {{element.bis}} </td>
+      <td mat-cell *matCellDef="let element"> {{formatZeit(element.bis)}} </td>
    </ng-container>
 
    <!-- Symbol Column -->
