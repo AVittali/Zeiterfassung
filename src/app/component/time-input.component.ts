@@ -20,7 +20,6 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class TimeInputDirective implements ControlValueAccessor {
-
   private onChange?: (value: any) => void;
   private onTouched?: () => void;
 
@@ -38,35 +37,27 @@ export class TimeInputDirective implements ControlValueAccessor {
 
   @HostListener('input', ['$event.target'])
   public onInput(target: HTMLInputElement) {
-    console.log({ onInput: target });
-    this.onChange?.(target.value);
+    // console.log({ onInput: target.value });
+
+    // Alle Zeichen außer Zahlen und den Doppelpunkt entfernen
+    var newValue = target.value.replace(/[^0-9:]/g, '');
+    // console.log(({replace:replValue}));
+
+    // Maximallänge 5 Zeichen
+    newValue = newValue.substring(0, 5);
+
+    this.onChange?.(newValue);
     this.onTouched?.();
-    this.setInputViewDateValue(target.value);
+    this.setInputViewDateValue(newValue);
   }
 
   public writeValue(value: any) {
-
-    console.log({ writeValueInput: value });
-
-    if (value !== undefined) {
-
-      try {
-        var numberValue = Number(value);
-        if (numberValue > 0 && numberValue < 24) {
-          this.value = numberValue + ":00";
-        }
-      } catch (error) {
-        this.value = "";
-      }
-    }
-
-    this.setInputViewDateValue(value);
-
+    console.log("writeValue");
   }
 
-  public registerOnChange(onChange: any) {
+  public registerOnChange(fn: any): void {
     console.log("registerOnChange");
-    this.onChange = onChange;
+    this.onChange = fn;
   }
 
   public registerOnTouched(onTouched: any) {
@@ -80,11 +71,15 @@ export class TimeInputDirective implements ControlValueAccessor {
   }
 
   private setInputViewDateValue(date: any) {
+    console.log({ setInputViewDateValue: date });
+
     if (date instanceof Date) {
       this.elementRef.nativeElement.value = format(date, 'dd.MM.yyyy');
     } else {
       this.elementRef.nativeElement.value = date;
     }
+    console.log({ nativeElement: this.elementRef.nativeElement.value });
+
   }
 
 }
