@@ -20,9 +20,8 @@ export class TimeFunctions {
         datumBis.setMinutes(this.getMinuten(bis));
 
         var bruttoArbeitszeit = differenceInHours(datumBis, datumVon);
-
-        // TODO Pause berücksichtigen
-        return bruttoArbeitszeit;
+        var pauseInStunden = pause / 60;
+        return bruttoArbeitszeit - pauseInStunden;
 
     }
 
