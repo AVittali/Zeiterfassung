@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table'
 import { MatListModule } from '@angular/material/list';
 import format from 'date-fns/format';
+import { TimeFunctions } from '../api/time-functions';
 
 /**
  * @title Basic list
@@ -52,19 +53,7 @@ export class ListArbeitszeit {
   }
 
   formatZeit(zeitValue: number): String {
-
-    var stunden = Math.floor(zeitValue / 100);
-    var minuten = zeitValue % 100;
-    return this.formatNumber(stunden) + ":" + this.formatNumber(minuten);
-
-  }
-
-  private formatNumber(number: number): String {
-    if (number < 10) {
-      return "0" + number;
-    }
-
-    return number + "";
+    return TimeFunctions.formatZeit(zeitValue);
   }
 
 }

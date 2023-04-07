@@ -4,6 +4,7 @@ import { Monat } from './monat';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table'
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
+import { TimeFunctions } from '../api/time-functions';
 
 /*
  * Übersicht der Arbeitszeiten im aktuellen Jahr
@@ -36,7 +37,7 @@ export class ListMonatsuebersicht {
       const jahr = arbeitszeit.datum.getFullYear();
       if (jahr === 2023) {
         const monatValue: number = arbeitszeit.datum.getMonth();
-        console.log({ monat: monatValue });
+        // console.log({ monat: monatValue });
         if (monatValue === 0)
         console.log({ monat0: arbeitszeit });
 
@@ -48,7 +49,10 @@ export class ListMonatsuebersicht {
           monateMap.set(current.monat, current);
         }
         current.tage = current.tage + 1;
-        // TODO Stunden addieren
+        // TODO Das geht leider nicht
+        // current.stunden = current.stunden + arbeitszeit.getNettoArbeitszeit();
+        current.stunden = current.stunden + TimeFunctions.getNettoArbeitszeit(arbeitszeit.von, arbeitszeit.bis, arbeitszeit.pause);
+
       }
 
     });

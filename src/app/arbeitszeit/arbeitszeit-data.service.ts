@@ -16,7 +16,7 @@ export class ArbeitszeitDataService {
 
   constructor(private localStorageService: LocalStorageService) { }
 
-  getArbeitszeiten() {
+  getArbeitszeiten() : Arbeitszeit[] {
     return this.arbeitszeiten;
   }
 
