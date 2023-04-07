@@ -88,17 +88,17 @@ export class TimeInputDirective implements ControlValueAccessor {
   }
 
   public registerOnChange(fn: any): void {
-    console.log("registerOnChange");
+    // console.log("registerOnChange");
     this.onChange = fn;
   }
 
   public registerOnTouched(onTouched: any) {
-    console.log("registerOnTouched");
+    // console.log("registerOnTouched");
     this.onTouched = onTouched;
   }
 
   public setDisabledState(isDisabled: boolean) {
-    console.log("setDisabledState");
+    // console.log("setDisabledState");
     this.disabled = isDisabled ? isDisabled : undefined;
   }
 
