@@ -4,6 +4,7 @@ import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LocalStorageService } from './local-storage.service';
 import { format } from 'date-fns';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -42,9 +43,41 @@ export class AppComponent {
     a.click();
   }
 
-  load() {
-    console.log("Aus Datei laden");
 
+
+  load(): void {
+    console.log("Aus Datei laden");
+    const inputElement = document.createElement('input');
+    inputElement.type = 'file';
+    inputElement.accept = '.json'; // optional, specifies the file type
+    if (inputElement == null)
+      return;
+
+    var fileContent: string = "";
+    inputElement.onchange = () => {
+
+      if (inputElement.files == null)
+        return;
+
+      var loadedFile = inputElement.files[0] as File;
+      console.log('Selected file:', loadedFile);
+
+      const reader = new FileReader();
+      reader.readAsText(loadedFile);
+      reader.onload = () => {
+        fileContent = reader.result as string;
+        console.log('File content:', fileContent);
+
+        // TODO: Wie geht es jetzt weiter?
+      };
+
+    };
+
+    inputElement.click();
+  }
+
+  private async getContent(file: File) {
+    return await file.text;
   }
 
 }
