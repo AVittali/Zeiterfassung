@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ArbeitszeitDataService } from '../arbeitszeit/arbeitszeit-data.service';
+import { ArbeitszeitDataService } from '../storage/arbeitszeit-data.service';
 import { Monat } from './monat';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table'

@@ -4,7 +4,7 @@ import { formatDate, Location, Time } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser'
 
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
-import { ArbeitszeitDataService } from '../arbeitszeit/arbeitszeit-data.service';
+import { ArbeitszeitDataService } from '../storage/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 

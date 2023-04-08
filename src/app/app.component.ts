@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Arbeitszeit } from './arbeitszeit/arbeitszeit';
-import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
+import { ArbeitszeitDataService } from './storage/arbeitszeit-data.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { LocalStorageService } from './local-storage.service';
+import { LocalStorageService } from './storage/local-storage.service';
 import { format } from 'date-fns';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';

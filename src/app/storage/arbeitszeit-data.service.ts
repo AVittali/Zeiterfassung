@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from '../local-storage.service';
-import { Arbeitszeit } from './arbeitszeit';
+import { LocalStorageService } from '../storage/local-storage.service';
+import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
 import { v4 as uuidv4 } from 'uuid';
 

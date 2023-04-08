@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Arbeitszeit } from './arbeitszeit';
-import { ArbeitszeitDataService } from './arbeitszeit-data.service';
+import { ArbeitszeitDataService } from '../storage/arbeitszeit-data.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table'

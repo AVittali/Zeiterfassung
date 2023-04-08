@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ArbeitszeitDetailComponent } from './arbeitszeit-detail/arbeitszeit-detail.component';
-import { ArbeitszeitDataService } from './arbeitszeit/arbeitszeit-data.service';
+import { ArbeitszeitDataService } from './storage/arbeitszeit-data.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
 import { MatMenuModule } from '@angular/material/menu';
