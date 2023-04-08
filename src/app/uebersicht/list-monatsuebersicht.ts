@@ -39,7 +39,7 @@ export class ListMonatsuebersicht {
         const monatValue: number = arbeitszeit.datum.getMonth();
         // console.log({ monat: monatValue });
         if (monatValue === 0)
-        console.log({ monat0: arbeitszeit });
+          console.log({ monat0: arbeitszeit });
 
         var current = monateMap.get(monatValue);
         if (current == undefined) {
@@ -57,7 +57,7 @@ export class ListMonatsuebersicht {
 
     });
 
-    console.log({ monate: monateMap.values() });
+    // console.log({ monate: monateMap.values() });
     return Array.from(monateMap.values());
 
   }
@@ -67,10 +67,10 @@ export class ListMonatsuebersicht {
   }
 
   formatMonat(monatValue: number): String {
-    var datum = new Date(2023, monatValue, 1);    
-    console.log({formatMonat: monatValue});
+    var datum = new Date(2023, monatValue, 1);
+    // console.log({ formatMonat: monatValue });
     datum.setMonth(monatValue);
-    console.log({datum: datum});
-    return datum.toLocaleString('de',{month:'long'});
+    // console.log({ datum: datum });
+    return datum.toLocaleString('de', { month: 'long' });
   }
 }
