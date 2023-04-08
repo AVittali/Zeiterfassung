@@ -5,6 +5,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { LocalStorageService } from './local-storage.service';
 import { format } from 'date-fns';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ export class AppComponent {
   title = 'Zeiterfassung';
 
   arbeitszeiten: Arbeitszeit[] = new ArbeitszeitDataService(new LocalStorageService).getArbeitszeiten();
+
+  constructor(private router: Router) { }
 
   /*
   constructor(breakpointObserver: BreakpointObserver) {
@@ -42,8 +45,6 @@ export class AppComponent {
     a.download = fileName;
     a.click();
   }
-
-
 
   load(): void {
     console.log("Aus Datei laden");
@@ -76,8 +77,8 @@ export class AppComponent {
     inputElement.click();
   }
 
-  private async getContent(file: File) {
-    return await file.text;
+  settings(): void {
+    this.router.navigateByUrl('/einstellungen');
   }
 
 }

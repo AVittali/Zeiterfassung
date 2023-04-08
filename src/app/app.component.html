@@ -7,6 +7,11 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="settings()">
+          <mat-icon>settings</mat-icon>
+          <span>Einstellungen</span>
+        </button>
+        <mat-divider></mat-divider>
         <button mat-menu-item (click)="save()">
           <mat-icon>save</mat-icon>
           <span>Daten exportieren</span>
