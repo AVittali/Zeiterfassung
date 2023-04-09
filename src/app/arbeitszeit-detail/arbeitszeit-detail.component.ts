@@ -76,6 +76,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
   save(): void {
 
+    console.log("Save clicked");
+
     if (!this.detailsForm.valid) {
       console.log({ filterForm: this.detailsForm });
       console.log({ "Keine gültige Daten": this.arbeitszeit });
@@ -83,11 +85,14 @@ export class ArbeitszeitDetailComponent implements OnInit {
       // return;
     }
 
-    const { datum, von, bis, pause } = this.detailsForm.value;
+    var { datum, von, bis, pause, ort, stundenlohn } = this.detailsForm.value;
     // const von = this.detailsForm.controls.von.zeitvalue;
     // const bis = this.detailsForm.controls.bis.value;
-    if (datum == null || von == null || bis == null || pause == null) {
+    if (datum == null || von == null || bis == null || pause == null || stundenlohn == null) {
       return;
+    }
+    if (ort == null) {
+      ort = "";
     }
 
     console.log({ datum: datum });
@@ -100,6 +105,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
     this.arbeitszeit.von = von;
     this.arbeitszeit.bis = bis;
     this.arbeitszeit.pause = pause;
+    this.arbeitszeit.ort = ort;
+    this.arbeitszeit.lohn = stundenlohn;
     console.log({ arbeitszeit: this.arbeitszeit });
 
     // Leider funktioniert die obere Abfrage nicht, daher hier zur Sicherheit
@@ -141,7 +148,15 @@ export class ArbeitszeitDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // this.animal = result;
-      console.log(result.value);
+      if (result != null) {
+        console.log(result.value);
+        if (!this.orte.includes(result.value)) {
+          this.orte.push(result.value);
+        } else {
+          console.log("Eintrag bereits vorhanden: " + result.value);
+        }
+      }
+
 
       // TODO Im Speicher ablegen
     });

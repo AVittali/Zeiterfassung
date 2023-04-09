@@ -21,11 +21,13 @@
       <mat-form-field>
         <mat-label>Von</mat-label>
         <input matInput appTimeInput formControlName="von">
+        <mat-hint>hh:mm</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Bis</mat-label>
         <input matInput appTimeInput formControlName="bis">
+        <mat-hint>hh:mm</mat-hint>
       </mat-form-field>
       <!--
       <input appTimeInput formControlName="von">
@@ -53,7 +55,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Ort</mat-label>
       <mat-select formControlName="ort">
-        <mat-option *ngFor="let ort of orte">{{ort}}</mat-option>
+        <mat-option></mat-option>
+        <mat-option *ngFor="let ort of orte" [value]="ort">{{ort}}</mat-option>
       </mat-select>
     </mat-form-field>
     <button mat-icon-button (click)="addOrt()">
