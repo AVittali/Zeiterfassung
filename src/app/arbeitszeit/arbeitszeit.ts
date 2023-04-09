@@ -8,8 +8,9 @@ export class Arbeitszeit implements ArbeitszeitModel {
     public von!: number;
     public bis!: number;
     public pause!: number;
+    public lohn!: number;
+    public ort!: string;
 
-   
     //constructor(id: string, datum: Date, von: string, bis: string, pause: number) { }
 
     // TODO Keine Ahnung warum das hier nicht geht. getNettoArbeitszeit ist keine Function.

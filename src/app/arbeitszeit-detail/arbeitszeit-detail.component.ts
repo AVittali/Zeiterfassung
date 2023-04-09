@@ -7,6 +7,9 @@ import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../storage/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { OrtDataService } from '../storage/ort-data.service';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { OrtDialog } from '../ort/ort-dialog';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
@@ -16,18 +19,23 @@ import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators }
 
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit!: Arbeitszeit;
+  orte = this.ortDataService.getOrte();
   detailsForm = this.formBuilder.group({
     datum: [new Date(), Validators.required],
     von: [0, Validators.required],
     bis: [0, Validators.required],
-    pause: [0]
+    pause: [0],
+    ort: [''],
+    stundenlohn: [0]
   });
 
   constructor(
     private route: ActivatedRoute,
     private arbeitszeitService: ArbeitszeitDataService,
+    private ortDataService: OrtDataService,
     private location: Location,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +47,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
       von: this.arbeitszeit.von ? this.arbeitszeit.von : 0,
       bis: this.arbeitszeit.bis ? this.arbeitszeit.bis : 0,
       pause: this.arbeitszeit.pause,
+      stundenlohn: this.arbeitszeit.lohn,
+      ort: this.arbeitszeit.ort
     });
   }
 
@@ -56,7 +66,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     // this.arbeitszeit = { ...this.arbeitszeitService.getArbeitszeit(id) ?? new Arbeitszeit() };
     this.arbeitszeit = this.arbeitszeitService.getArbeitszeit(id);
 
-    console.log({"Arbeitszeit eingelesen" : this.arbeitszeit});
+    console.log({ "Arbeitszeit eingelesen": this.arbeitszeit });
   }
 
   goBack(): void {
@@ -83,7 +93,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     console.log({ von: von });
     console.log({ bis: bis });
     console.log({ pause: pause });
-    console.log({form: this.detailsForm});   
+    console.log({ form: this.detailsForm });
 
     this.arbeitszeit.datum = datum;
     this.arbeitszeit.von = von;
@@ -104,6 +114,23 @@ export class ArbeitszeitDetailComponent implements OnInit {
 
     // Auf Tabelle zurück
     this.goBack();
+
+  }
+
+  addOrt(): void {
+    console.log("Ort hinzufügen");
+
+    const dialogRef = this.dialog.open(OrtDialog, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+      console.log(result.value);
+
+      // TODO Im Speicher ablegen
+    });
 
   }
 

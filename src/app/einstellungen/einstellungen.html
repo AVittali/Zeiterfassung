@@ -1,4 +1,16 @@
+<h2>Einstellungen</h2>
+
+<form>
+  <div>
+    <mat-form-field>
+      <mat-label>Stundenlohn</mat-label>
+      <input matInput id="stundenlohn" type="number" />
+    </mat-form-field>
+  </div>
+</form>
+
 <div>
   <button type="button" (click)="goBack()">zurück</button>
   <!-- <button type="button" [disabled]="!detailsForm.valid" (click)="save()">speichern</button> -->
+  <button type="button" (click)="save()">speichern</button>
 </div>

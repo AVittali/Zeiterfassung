@@ -26,13 +26,16 @@ import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
 import { MatMenuModule } from '@angular/material/menu';
 import { TimeInputDirective } from './component/time-input.component';
 import { MatFormFieldControl } from '@angular/material/form-field';
-
+import { Einstellungen } from './einstellungen/einstellungen';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { OrtDialog } from './ort/ort-dialog';
 
 // import { Injectable } from '@angular/core';
 
 @NgModule({
   declarations: [
-    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht
+    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht, Einstellungen, OrtDialog
   ],
   imports: [
     BrowserModule,
@@ -50,9 +53,11 @@ import { MatFormFieldControl } from '@angular/material/form-field';
     MatTabsModule,
     MatToolbarModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatNativeDateModule,
     MatIconModule,
     MatMenuModule,
+    MatSelectModule,
     TextFieldModule,
 
     ServiceWorkerModule.register('ngsw-worker.js', {

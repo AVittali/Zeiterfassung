@@ -7,6 +7,7 @@ import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../storage/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { OrtDataService } from '../storage/ort-data.service';
 
 @Component({
   selector: 'einstellungen',
@@ -15,6 +16,7 @@ import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators }
 })
 
 export class Einstellungen implements OnInit {
+
   // detailsForm = this.formBuilder.group({
   //   datum: [new Date(), Validators.required],
   //   von: [0, Validators.required],
@@ -24,7 +26,7 @@ export class Einstellungen implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private arbeitszeitService: ArbeitszeitDataService,
+    private ortDataService: OrtDataService,
     private location: Location,
     private formBuilder: FormBuilder
   ) { }
@@ -55,6 +57,10 @@ export class Einstellungen implements OnInit {
 
   //   console.log({"Arbeitszeit eingelesen" : this.arbeitszeit});
   // }
+
+  addOrt(): void {
+
+  }
 
   goBack(): void {
     this.location.back();

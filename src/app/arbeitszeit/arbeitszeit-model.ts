@@ -4,6 +4,8 @@ export interface ArbeitszeitModel {
     datum: Date,
     von: number,
     bis: number,
-    pause: number
+    pause: number,
+    lohn: number,
+    ort: String
 
 }

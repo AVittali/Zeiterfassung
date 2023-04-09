@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Ort hinzufügen</h1>
+<div mat-dialog-content>
+    <p>Neuen Ort eingeben</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Ort</mat-label>
+        <input matInput [formControl]="ortFormControl" cdkFocusInitial>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Abbrechen</button>
+    <button mat-button [mat-dialog-close]="ortFormControl">Ok</button>
+</div>

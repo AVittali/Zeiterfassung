@@ -1,4 +1,4 @@
-<form [formGroup]="detailsForm" (ngSubmit)="save()">
+<form [formGroup]="detailsForm">
 
   <div *ngIf="arbeitszeit">
 
@@ -48,6 +48,26 @@
         <input matInput id="pause" type="number" formControlName="pause" />
       </mat-form-field>
     </p>
+
+    <!-- Ort -->
+    <mat-form-field appearance="fill">
+      <mat-label>Ort</mat-label>
+      <mat-select formControlName="ort">
+        <mat-option *ngFor="let ort of orte">{{ort}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button (click)="addOrt()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <!-- Stundenlohn -->
+    <p>
+      <mat-form-field>
+        <mat-label>Stundenlohn</mat-label>
+        <input matInput id="stundenlohn" type="number" formControlName="stundenlohn" />
+      </mat-form-field>
+    </p>
+
   </div>
 
 </form>
