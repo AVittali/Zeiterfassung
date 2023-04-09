@@ -10,6 +10,7 @@ import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators }
 import { OrtDataService } from '../storage/ort-data.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrtDialog } from '../ort/ort-dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
@@ -115,6 +116,19 @@ export class ArbeitszeitDetailComponent implements OnInit {
     // Auf Tabelle zurück
     this.goBack();
 
+  }
+
+  delete(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Hier den Löschvorgang durchführen
+        if (this.arbeitszeit.id != "") {
+          console.log("Löschen bestätigt");
+        }
+      }
+    });
   }
 
   addOrt(): void {

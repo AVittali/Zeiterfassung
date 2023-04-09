@@ -30,12 +30,17 @@ import { Einstellungen } from './einstellungen/einstellungen';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { OrtDialog } from './ort/ort-dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 // import { Injectable } from '@angular/core';
 
 @NgModule({
   declarations: [
-    AppComponent, ListArbeitszeit, ArbeitszeitDetailComponent, ListMonatsuebersicht, Einstellungen, OrtDialog
+    AppComponent,
+    ListArbeitszeit, ListMonatsuebersicht,
+    ArbeitszeitDetailComponent,
+    Einstellungen,
+    OrtDialog, ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
