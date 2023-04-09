@@ -18,7 +18,19 @@ export class AppComponent {
 
   arbeitszeiten: Arbeitszeit[] = new ArbeitszeitDataService(new LocalStorageService).getArbeitszeiten();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+
+    // TODO Eigentlich brauche ich diesen Block nicht: Bei Aufruf aus dem Browser funktioniert Orientation, ansonsten leider nicht
+    screen.orientation.addEventListener("change", () => {
+      console.log("Orientation change");
+
+    });
+
+    window.addEventListener("load", () => {
+      console.log("Orientation load");
+    });
+
+  }
 
   /*
   constructor(breakpointObserver: BreakpointObserver) {
