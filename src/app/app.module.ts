@@ -1,6 +1,6 @@
 import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +33,10 @@ import { OrtDialog } from './ort/ort-dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 // import { Injectable } from '@angular/core';
+
+import myLocaleDe from '@angular/common/locales/de';
+
+registerLocaleData(myLocaleDe);
 
 @NgModule({
   declarations: [

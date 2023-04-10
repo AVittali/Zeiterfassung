@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table'
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { TimeFunctions } from '../api/time-functions';
+import { formatNumber } from '@angular/common';
+import { Inject, LOCALE_ID } from '@angular/core';
 
 /*
  * Übersicht der Arbeitszeiten im aktuellen Jahr
@@ -17,11 +19,13 @@ import { TimeFunctions } from '../api/time-functions';
 export class ListMonatsuebersicht {
 
   // Spaltenüberschriften
-  displayedColumns: string[] = ['monat', 'tage', 'stunden'];
+  displayedColumns: string[] = ['monat', 'tage', 'stunden', 'lohn'];
 
   monate!: Monat[];
 
-  constructor(private arbeitszeitDataService: ArbeitszeitDataService) {
+  constructor(private arbeitszeitDataService: ArbeitszeitDataService,
+    @Inject(LOCALE_ID) public locale: string
+  ) {
     this.monate = this.createMonate();
     console.log({ Konstruktor: this.monate });
   }
@@ -51,7 +55,10 @@ export class ListMonatsuebersicht {
         current.tage = current.tage + 1;
         // TODO Das geht leider nicht
         // current.stunden = current.stunden + arbeitszeit.getNettoArbeitszeit();
-        current.stunden = current.stunden + TimeFunctions.getNettoArbeitszeit(arbeitszeit.von, arbeitszeit.bis, arbeitszeit.pause);
+        const netto = TimeFunctions.getNettoArbeitszeit(arbeitszeit.von, arbeitszeit.bis, arbeitszeit.pause);
+        current.stunden = current.stunden + netto;
+
+        current.lohn = current.lohn + (netto * arbeitszeit.lohn);
 
       }
 
@@ -73,4 +80,9 @@ export class ListMonatsuebersicht {
     // console.log({ datum: datum });
     return datum.toLocaleString('de', { month: 'long' });
   }
+
+  // formatLohn(value: number): String {
+  //   return formatNumber(value, this.locale, '1.2-2') + " €";
+  // }
+
 }
