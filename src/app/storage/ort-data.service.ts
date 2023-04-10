@@ -12,52 +12,21 @@ export class OrtDataService {
 
   private key: string = "orte";
 
-  orte: String[] = this.getOrteFromLocalStorage();
+  orte: string[] = this.getOrteFromLocalStorage();
 
   constructor(private localStorageService: LocalStorageService) { }
 
-  getOrte(): String[] {
+  getOrte(): string[] {
     return this.orte;
   }
 
-  /**
-   * Aktualisieren der Arbeitszeit
-   * @param arbeitszeit 
-   */
-  updateArbeitszeit(arbeitszeit: Arbeitszeit) {
-
-    // console.log({ updateArbeitszeit: arbeitszeit });
-
-
-    // // Neuanlage
-    // if (!arbeitszeit.id) {
-    //   console.log({ neuanlage: arbeitszeit });
-
-    //   arbeitszeit.id = uuidv4();
-    //   this.arbeitszeiten.push(arbeitszeit);
-    //   this.localStorageService.setItem(this.key, this.arbeitszeiten);
-    //   return;
-    // }
-
-    // // Daten aktualisieren
-    // var current = this.getArbeitszeit(arbeitszeit.id);
-    // if (current) {
-    //   console.log({ currentUebertragen: current });
-
-    //   current.datum = arbeitszeit.datum;
-    //   current.von = arbeitszeit.von;
-    //   current.bis = arbeitszeit.bis;
-    //   current.pause = arbeitszeit.pause;
-
-    // }
-
-    // console.log({ getArbeitszeit: this.getArbeitszeit(arbeitszeit.id) });
-
-    // this.localStorageService.setItem(this.key, this.arbeitszeiten);
-
+  save(orte: string[]) {
+    console.log({ save: orte });
+    this.localStorageService.setItem(this.key, orte);
+    this.orte = orte;
   }
 
-  private getOrteFromLocalStorage(): String[] {
+  private getOrteFromLocalStorage(): string[] {
 
     console.log("Lese Orte vom Local Storage ein");
 
@@ -68,7 +37,7 @@ export class OrtDataService {
     }
 
     // JSON.parse erzeugt kein gültiges Datum
-    let storage = value as String[];
+    let storage = value as string[];
 
     console.log({ storageArbeitszeitValue: storage });
 
@@ -76,7 +45,7 @@ export class OrtDataService {
 
   }
 
-  private createDefaultOrte(): String[] {
+  private createDefaultOrte(): string[] {
 
     var temp = new Array;
     temp.push("Dr. Müller");

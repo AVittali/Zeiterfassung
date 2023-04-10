@@ -20,14 +20,14 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 
 export class ArbeitszeitDetailComponent implements OnInit {
   arbeitszeit!: Arbeitszeit;
-  orte = this.ortDataService.getOrte();
+  orte: string[] = this.ortDataService.getOrte();
   detailsForm = this.formBuilder.group({
     datum: [new Date(), Validators.required],
     von: [0, Validators.required],
     bis: [0, Validators.required],
     pause: [0],
     ort: [''],
-    stundenlohn: [0]
+    stundenlohn: [0, Validators.required]
   });
 
   constructor(
@@ -88,11 +88,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
     var { datum, von, bis, pause, ort, stundenlohn } = this.detailsForm.value;
     // const von = this.detailsForm.controls.von.zeitvalue;
     // const bis = this.detailsForm.controls.bis.value;
-    if (datum == null || von == null || bis == null || pause == null || stundenlohn == null) {
+    if (datum == null || von == null || bis == null || stundenlohn == null) {
       return;
-    }
-    if (ort == null) {
-      ort = "";
     }
 
     console.log({ datum: datum });
@@ -104,8 +101,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
     this.arbeitszeit.datum = datum;
     this.arbeitszeit.von = von;
     this.arbeitszeit.bis = bis;
-    this.arbeitszeit.pause = pause;
-    this.arbeitszeit.ort = ort;
+    this.arbeitszeit.pause = pause ? pause : 0;
+    this.arbeitszeit.ort = ort ? ort : "";
     this.arbeitszeit.lohn = stundenlohn;
     console.log({ arbeitszeit: this.arbeitszeit });
 
@@ -152,13 +149,11 @@ export class ArbeitszeitDetailComponent implements OnInit {
         console.log(result.value);
         if (!this.orte.includes(result.value)) {
           this.orte.push(result.value);
+          this.ortDataService.save(this.orte);
         } else {
           console.log("Eintrag bereits vorhanden: " + result.value);
         }
       }
-
-
-      // TODO Im Speicher ablegen
     });
 
   }
