@@ -67,6 +67,13 @@ export class ArbeitszeitDataService {
 
   }
 
+  public saveArbeitszeitenToLocalStorage(arbeitszeiten: Arbeitszeit[]) {
+    this.localStorageService.setItem(this.key, arbeitszeiten);
+    console.log("Arbeitszeiten gespeichert");
+    
+  }
+
+
   private getArbeitszeitenFromLocalStorage(): Arbeitszeit[] {
 
     console.log("Lese Local Storage ein");
