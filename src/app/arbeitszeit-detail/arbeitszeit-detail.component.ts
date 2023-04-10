@@ -15,7 +15,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 @Component({
   selector: 'app-arbeitszeit-detail',
   templateUrl: './arbeitszeit-detail.component.html',
-  styleUrls: ['./arbeitszeit-detail.component.css']
+  styleUrls: ['./arbeitszeit-detail.component.scss']
 })
 
 export class ArbeitszeitDetailComponent implements OnInit {
