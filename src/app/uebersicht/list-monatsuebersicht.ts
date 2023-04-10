@@ -13,7 +13,8 @@ import { Inject, LOCALE_ID } from '@angular/core';
  */
 @Component({
   selector: 'list-monatsuebersicht',
-  templateUrl: 'list-monatsuebersicht.html'
+  templateUrl: 'list-monatsuebersicht.html',
+  styleUrls: ['./list-monatsuebersicht.scss']
 })
 
 export class ListMonatsuebersicht {

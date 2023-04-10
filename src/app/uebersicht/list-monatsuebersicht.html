@@ -8,20 +8,20 @@
 
     <!-- Gearbeitete Tage -->
     <ng-container matColumnDef="tage">
-        <th mat-header-cell *matHeaderCellDef> Tage </th>
-        <td mat-cell *matCellDef="let element"> {{element.tage}} </td>
+        <th mat-header-cell *matHeaderCellDef class="right-align"> Tage </th>
+        <td mat-cell *matCellDef="let element" class="right-align"> {{element.tage}} </td>
     </ng-container>
 
     <!-- Gearbeitete Stunden -->
     <ng-container matColumnDef="stunden">
-        <th mat-header-cell *matHeaderCellDef> Stunden </th>
-        <td mat-cell *matCellDef="let element"> {{element.stunden}} </td>
+        <th mat-header-cell *matHeaderCellDef class="right-align"> Stunden </th>
+        <td mat-cell *matCellDef="let element" class="right-align"> {{element.stunden|number : '1.2-2'}} </td>
     </ng-container>
 
     <!-- Lohn -->
     <ng-container matColumnDef="lohn">
-        <th mat-header-cell *matHeaderCellDef> Lohn </th>
-        <td mat-cell *matCellDef="let element"> {{element.lohn|currency:'EUR':'symbol'}} </td>
+        <th mat-header-cell *matHeaderCellDef class="right-align"> Lohn </th>
+        <td mat-cell *matCellDef="let element" class="right-align"> {{element.lohn|currency:'EUR':'symbol'}} </td>
         <!-- <td mat-cell *matCellDef="let element"> {{formatLohn(element.lohn)}} </td> -->
     </ng-container>
 
