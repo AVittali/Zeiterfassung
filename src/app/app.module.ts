@@ -26,7 +26,7 @@ import { ListMonatsuebersicht } from './uebersicht/list-monatsuebersicht';
 import { MatMenuModule } from '@angular/material/menu';
 import { TimeInputDirective } from './component/time-input.component';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { Einstellungen } from './einstellungen/einstellungen';
+import { EinstellungenDetailComponent } from './einstellungen/einstellungen-detail';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { OrtDialog } from './ort/ort-dialog';
@@ -43,7 +43,7 @@ registerLocaleData(myLocaleDe);
     AppComponent,
     ListArbeitszeit, ListMonatsuebersicht,
     ArbeitszeitDetailComponent,
-    Einstellungen,
+    EinstellungenDetailComponent,
     OrtDialog, ConfirmDialogComponent
   ],
   imports: [

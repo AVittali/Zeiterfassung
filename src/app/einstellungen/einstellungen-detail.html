@@ -1,10 +1,10 @@
 <h2>Einstellungen</h2>
 
-<form>
+<form [formGroup]="detailsForm">
   <div>
     <mat-form-field>
       <mat-label>Stundenlohn</mat-label>
-      <input matInput id="stundenlohn" type="number" />
+      <input matInput id="stundenlohn" type="number"  formControlName="stundenlohn"/>
     </mat-form-field>
   </div>
 </form>
