@@ -11,6 +11,7 @@ import { OrtDataService } from '../storage/ort-data.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrtDialog } from '../ort/ort-dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { EinstellungDataService } from '../storage/einstellungen-data.service';
 
 @Component({
   selector: 'app-arbeitszeit-detail',
@@ -34,6 +35,7 @@ export class ArbeitszeitDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private arbeitszeitService: ArbeitszeitDataService,
     private ortDataService: OrtDataService,
+    private einstellungDataService: EinstellungDataService,
     private location: Location,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
@@ -58,8 +60,9 @@ export class ArbeitszeitDetailComponent implements OnInit {
     var id = this.route.snapshot.paramMap.get("id");
     console.log({ id: id });
 
-    if (id == null) {
+    if (id == null || id == "0") {
       this.arbeitszeit = new Arbeitszeit();
+      this.arbeitszeit.lohn = this.einstellungDataService.getEinstellung().stundenlohn;
       return;
     }
 
