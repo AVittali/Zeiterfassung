@@ -10,9 +10,7 @@
         <mat-hint>DD.MM.YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
         <mat-datepicker #picker3></mat-datepicker>
-        <mat-error>
-          Gültiges Datum eingeben
-        </mat-error>
+        <mat-error>Gültiges Datum eingeben </mat-error>
       </mat-form-field>
     </p>
 
@@ -22,12 +20,14 @@
         <mat-label>Von</mat-label>
         <input matInput appTimeInput formControlName="von">
         <mat-hint>hh:mm</mat-hint>
+        <mat-error>Gültige Uhrzeit eingeben </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Bis</mat-label>
         <input matInput appTimeInput formControlName="bis">
         <mat-hint>hh:mm</mat-hint>
+        <mat-error>Gültige Uhrzeit eingeben </mat-error>
       </mat-form-field>
       <!--
       <input appTimeInput formControlName="von">
@@ -68,6 +68,7 @@
       <mat-form-field>
         <mat-label>Stundenlohn</mat-label>
         <input matInput id="stundenlohn" type="number" formControlName="stundenlohn" />
+        <mat-error>Stundenlohen muss eingeben werden </mat-error>
       </mat-form-field>
     </p>
 
@@ -162,6 +163,6 @@
 <div>
   <button type="button" (click)="goBack()">zurück</button>
   <button type="button" [disabled]="!detailsForm.valid" (click)="save()">speichern</button>
-  <button type="button" (click)="delete()">löschen</button>
+  <button type="button" [disabled]="arbeitszeit.id == null" (click)="delete()">löschen</button>
   <!-- <button type="button" (click)="save()">speichern</button> -->
 </div>
