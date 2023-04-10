@@ -6,6 +6,8 @@ import { LocalStorageService } from './storage/local-storage.service';
 import { format } from 'date-fns';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { OrtDataService } from './storage/ort-data.service';
+import { EinstellungDataService } from './storage/einstellungen-data.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +18,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Zeiterfassung';
 
-  arbeitszeiten: Arbeitszeit[] = new ArbeitszeitDataService(new LocalStorageService).getArbeitszeiten();
 
-  constructor(private router: Router) {
+
+  constructor(private router: Router,
+    private arbeitszeitService: ArbeitszeitDataService,
+    private ortDataService: OrtDataService,
+    private einstellungDataService: EinstellungDataService,
+  ) {
 
     // TODO Eigentlich brauche ich diesen Block nicht: Bei Aufruf aus dem Browser funktioniert Orientation, ansonsten leider nicht
     screen.orientation.addEventListener("change", () => {
@@ -47,7 +53,7 @@ export class AppComponent {
   save() {
     console.log("In Datei speichern");
     var fileName = "Arbeitszeiten " + format(new Date(), 'yyyy-MM-dd HH-mm') + ".json";
-    this.writeContents(JSON.stringify(this.arbeitszeiten), fileName, 'text/plain');
+    this.writeContents(JSON.stringify([this.arbeitszeitService.getArbeitszeiten(), this.ortDataService.getOrte(), this.einstellungDataService.getEinstellung()]), fileName, 'text/plain');
   }
 
   writeContents(content: any, fileName: any, contentType: any) {
