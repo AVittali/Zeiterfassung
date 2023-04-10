@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { OrtDataService } from './storage/ort-data.service';
 import { EinstellungDataService } from './storage/einstellungen-data.service';
+import { Einstellung } from './einstellungen/einstellung';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent {
 
 
   constructor(private router: Router,
-    private arbeitszeitService: ArbeitszeitDataService,
+    private arbeitszeitDataService: ArbeitszeitDataService,
     private ortDataService: OrtDataService,
     private einstellungDataService: EinstellungDataService,
   ) {
@@ -53,7 +54,7 @@ export class AppComponent {
   save() {
     console.log("In Datei speichern");
     var fileName = "Arbeitszeiten " + format(new Date(), 'yyyy-MM-dd HH-mm') + ".json";
-    this.writeContents(JSON.stringify([this.arbeitszeitService.getArbeitszeiten(), this.ortDataService.getOrte(), this.einstellungDataService.getEinstellung()]), fileName, 'text/plain');
+    this.writeContents(JSON.stringify([this.arbeitszeitDataService.getArbeitszeiten(), this.ortDataService.getOrte(), this.einstellungDataService.getEinstellung()]), fileName, 'text/plain');
   }
 
   writeContents(content: any, fileName: any, contentType: any) {
@@ -87,7 +88,23 @@ export class AppComponent {
         fileContent = reader.result as string;
         console.log('File content:', fileContent);
 
-        // TODO: Wie geht es jetzt weiter?
+        var parsed = JSON.parse(fileContent);
+        var arbeitszeiten : Arbeitszeit[] = parsed[0];
+        var orte : string[]= parsed[1];
+        var einstellung : Einstellung= parsed[2];
+
+        console.log('Arbeitszeiten geladen: ', arbeitszeiten);
+        console.log('Orte geladen: ', orte);
+        console.log('Einstellung geladen: ', einstellung);
+
+        // TODO Hier könnte man noch einen Dialog dazwischen schalten
+        // Schreiben in die Datenbank
+        this.arbeitszeitDataService.saveArbeitszeitenToLocalStorage(arbeitszeiten);
+        this.ortDataService.save(orte);
+        this.einstellungDataService.save(einstellung);
+
+        // Aktuelle Seite aktualisieren
+        window.location.reload();
       };
 
     };
