@@ -105,8 +105,6 @@ export class ArbeitszeitDataService {
   private createDefaultArbeitszeit(): Arbeitszeit[] {
 
     var temp = new Array;
-    var arbeitszeit = new Arbeitszeit();
-    temp.push({ id: "1", datum: new Date("2023-02-06"), von: 1000, bis: 1700, pause: 45 });
     temp.push({ id: "1", datum: new Date("2023-02-06"), von: 1000, bis: 1700, pause: 45 });
     temp.push({ id: "2", datum: new Date("2023-02-07"), von: 830, bis: 1230, pause: 0 });
     temp.push({ id: "3", datum: new Date("2023-02-14"), von: 1400, bis: 1800, pause: 0 });
@@ -118,7 +116,6 @@ export class ArbeitszeitDataService {
     temp.push({ id: "9", datum: new Date("2023-03-16"), von: 800, bis: 1200, pause: 0 });
     temp.push({ id: "10", datum: new Date("2023-03-20"), von: 830, bis: 1430, pause: 45 });
     temp.push({ id: "11", datum: new Date("2023-03-21"), von: 830, bis: 1530, pause: 60 });
-    temp.push(arbeitszeit);
 
     console.log({ "Testdaten erzeugt": temp });
     return temp;
