@@ -1,3 +1,14 @@
+:host {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+}
+
+mat-tab-nav-panel {
+    display: block;
+    overflow: auto;
+}
+
 span {
     display: inline-block;
     text-align: center;
@@ -10,8 +21,4 @@ span {
     grid-template-rows: auto auto 1fr;
     // position: sticky;
     // height: 100vh;
-}
-
-.content {
-    overflow: auto;
 }
