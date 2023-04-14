@@ -27,15 +27,17 @@ export class AppComponent {
     private einstellungDataService: EinstellungDataService,
   ) {
 
+
     // TODO Eigentlich brauche ich diesen Block nicht: Bei Aufruf aus dem Browser funktioniert Orientation, ansonsten leider nicht
-    screen.orientation.addEventListener("change", () => {
-      console.log("Orientation change");
+    // Der Block hat zu einer leeren Seite auf dem IPhone geführt, da der Eventlistener zu einem Absturz geführt hat
+    // screen.orientation.addEventListener("change", () => {
+    //   console.log("Orientation change");
 
-    });
+    // });
 
-    window.addEventListener("load", () => {
-      console.log("Orientation load");
-    });
+    // window.addEventListener("load", () => {
+    //   console.log("Orientation load");
+    // });
 
   }
 
@@ -89,9 +91,9 @@ export class AppComponent {
         console.log('File content:', fileContent);
 
         var parsed = JSON.parse(fileContent);
-        var arbeitszeiten : Arbeitszeit[] = parsed[0];
-        var orte : string[]= parsed[1];
-        var einstellung : Einstellung= parsed[2];
+        var arbeitszeiten: Arbeitszeit[] = parsed[0];
+        var orte: string[] = parsed[1];
+        var einstellung: Einstellung = parsed[2];
 
         console.log('Arbeitszeiten geladen: ', arbeitszeiten);
         console.log('Orte geladen: ', orte);
