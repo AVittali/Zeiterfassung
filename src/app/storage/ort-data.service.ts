@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
@@ -48,10 +48,12 @@ export class OrtDataService {
   private createDefaultOrte(): string[] {
 
     var temp = new Array;
-    temp.push("Dr. Müller");
-    temp.push("Dr. Meier");
-    temp.push("Dr. Schmitt");
-    temp.push("Dr. Vittali");
+    if (isDevMode()) {
+      temp.push("Dr. Müller");
+      temp.push("Dr. Meier");
+      temp.push("Dr. Schmitt");
+      temp.push("Dr. Vittali");
+    }
 
     console.log({ "Testdaten erzeugt": temp });
     return temp;

@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
@@ -49,7 +49,9 @@ export class EinstellungDataService {
   private createDefaultOrte(): Einstellung {
 
     var temp = new Einstellung();
-    temp.stundenlohn = 12.50;
+    if (isDevMode()) {
+      temp.stundenlohn = 12.50;
+    }
     console.log({ "Testdaten erzeugt": temp });
     return temp;
   }

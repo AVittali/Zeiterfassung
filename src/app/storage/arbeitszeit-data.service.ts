@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { LocalStorageService } from '../storage/local-storage.service';
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { UniqueSelectionDispatcher } from '@angular/cdk/collections';
@@ -16,14 +16,14 @@ export class ArbeitszeitDataService {
 
   constructor(private localStorageService: LocalStorageService) { }
 
-  getArbeitszeiten() : Arbeitszeit[] {
+  getArbeitszeiten(): Arbeitszeit[] {
     return this.arbeitszeiten;
   }
 
   public getArbeitszeit(id: String): Arbeitszeit {
 
-    console.log({"Lese Arbeitszeit":id});
-    
+    console.log({ "Lese Arbeitszeit": id });
+
     if (id === "")
       return new Arbeitszeit();
 
@@ -70,7 +70,7 @@ export class ArbeitszeitDataService {
   public saveArbeitszeitenToLocalStorage(arbeitszeiten: Arbeitszeit[]) {
     this.localStorageService.setItem(this.key, arbeitszeiten);
     console.log("Arbeitszeiten gespeichert");
-    
+
   }
 
 
@@ -105,17 +105,19 @@ export class ArbeitszeitDataService {
   private createDefaultArbeitszeit(): Arbeitszeit[] {
 
     var temp = new Array;
-    temp.push({ id: "1", datum: new Date("2023-02-06"), von: 1000, bis: 1700, pause: 45, lohn: 12 });
-    temp.push({ id: "2", datum: new Date("2023-02-07"), von: 830, bis: 1230, pause: 0, lohn: 12 });
-    temp.push({ id: "3", datum: new Date("2023-02-14"), von: 1400, bis: 1800, pause: 0, lohn: 12 });
-    temp.push({ id: "4", datum: new Date("2023-03-07"), von: 1500, bis: 1800, pause: 0, lohn: 12 });
-    temp.push({ id: "5", datum: new Date("2023-03-08"), von: 800, bis: 1500, pause: 60, lohn: 12 });
-    temp.push({ id: "6", datum: new Date("2023-03-09"), von: 830, bis: 1230, pause: 0, lohn: 12 });
-    temp.push({ id: "7", datum: new Date("2023-02-14"), von: 1400, bis: 1800, pause: 0, lohn: 12 });
-    temp.push({ id: "8", datum: new Date("2023-03-15"), von: 800, bis: 1600, pause: 60, lohn: 12 });
-    temp.push({ id: "9", datum: new Date("2023-03-16"), von: 800, bis: 1200, pause: 0, lohn: 12 });
-    temp.push({ id: "10", datum: new Date("2023-03-20"), von: 830, bis: 1430, pause: 45, lohn: 12 });
-    temp.push({ id: "11", datum: new Date("2023-03-21"), von: 830, bis: 1530, pause: 60, lohn: 12 });
+    if (isDevMode()) {
+      temp.push({ id: "1", datum: new Date("2023-02-06"), von: 1000, bis: 1700, pause: 45, lohn: 12 });
+      temp.push({ id: "2", datum: new Date("2023-02-07"), von: 830, bis: 1230, pause: 0, lohn: 12 });
+      temp.push({ id: "3", datum: new Date("2023-02-14"), von: 1400, bis: 1800, pause: 0, lohn: 12 });
+      temp.push({ id: "4", datum: new Date("2023-03-07"), von: 1500, bis: 1800, pause: 0, lohn: 12 });
+      temp.push({ id: "5", datum: new Date("2023-03-08"), von: 800, bis: 1500, pause: 60, lohn: 12 });
+      temp.push({ id: "6", datum: new Date("2023-03-09"), von: 830, bis: 1230, pause: 0, lohn: 12 });
+      temp.push({ id: "7", datum: new Date("2023-02-14"), von: 1400, bis: 1800, pause: 0, lohn: 12 });
+      temp.push({ id: "8", datum: new Date("2023-03-15"), von: 800, bis: 1600, pause: 60, lohn: 12 });
+      temp.push({ id: "9", datum: new Date("2023-03-16"), von: 800, bis: 1200, pause: 0, lohn: 12 });
+      temp.push({ id: "10", datum: new Date("2023-03-20"), von: 830, bis: 1430, pause: 45, lohn: 12 });
+      temp.push({ id: "11", datum: new Date("2023-03-21"), von: 830, bis: 1530, pause: 60, lohn: 12 });
+    }
 
     console.log({ "Testdaten erzeugt": temp });
     return temp;
