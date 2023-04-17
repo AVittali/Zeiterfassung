@@ -133,6 +133,8 @@ export class ArbeitszeitDetailComponent implements OnInit {
         // Hier den Löschvorgang durchführen
         if (this.arbeitszeit.id != "") {
           console.log("Löschen bestätigt");
+          this.arbeitszeitService.deleteArbeitszeit(this.arbeitszeit.id);
+          this.goBack();
         }
       }
     });

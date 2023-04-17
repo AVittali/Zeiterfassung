@@ -67,6 +67,27 @@ export class ArbeitszeitDataService {
 
   }
 
+  /**
+   * Löschen der Arbeitszeit
+   */
+  deleteArbeitszeit(id: string) {
+
+    console.log({ "Löschen der ID": id });
+
+    // Element löschen
+    this.arbeitszeiten.forEach((value, index) => {
+      if (value.id == id) {
+        this.arbeitszeiten.splice(index, 1);
+        console.log("Löschen erfolgreich");
+
+      }
+    });
+
+    // Speicher aktualisieren
+    this.localStorageService.setItem(this.key, this.arbeitszeiten);
+
+  }
+
   public saveArbeitszeitenToLocalStorage(arbeitszeiten: Arbeitszeit[]) {
     this.localStorageService.setItem(this.key, arbeitszeiten);
     console.log("Arbeitszeiten gespeichert");
