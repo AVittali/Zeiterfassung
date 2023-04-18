@@ -20,14 +20,24 @@
         <mat-label>Von</mat-label>
         <input matInput appTimeInput formControlName="von">
         <mat-hint>hh:mm</mat-hint>
-        <mat-error>Gültige Uhrzeit eingeben </mat-error>
+        <mat-error *ngIf="detailsForm.get('von')?.hasError('invalidStunden')">
+          Stunden {{detailsForm.get('von')?.getError('invalidStunden').stunden }} ungültig
+        </mat-error>
+        <mat-error *ngIf="detailsForm.get('von')?.hasError('invalidMinuten')">
+          Minuten {{detailsForm.get('von')?.getError('invalidMinuten').minuten }} ungültig
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Bis</mat-label>
         <input matInput appTimeInput formControlName="bis">
         <mat-hint>hh:mm</mat-hint>
-        <mat-error>Gültige Uhrzeit eingeben </mat-error>
+        <mat-error *ngIf="detailsForm.get('bis')?.hasError('invalidStunden')">
+          Stunden {{detailsForm.get('bis')?.getError('invalidStunden').stunden }} ungültig
+        </mat-error>
+        <mat-error *ngIf="detailsForm.get('bis')?.hasError('invalidMinuten')">
+          Minuten {{detailsForm.get('bis')?.getError('invalidMinuten').minuten }} ungültig
+        </mat-error>
       </mat-form-field>
       <!--
       <input appTimeInput formControlName="von">

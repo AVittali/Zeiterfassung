@@ -1,7 +1,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, Directive, ElementRef, forwardRef, HostBinding, HostListener, Inject, inject, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
-import { ControlValueAccessor, ControlContainer, NG_VALUE_ACCESSOR, AbstractControlDirective, NgControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
+import { ControlValueAccessor, ControlContainer, NG_VALUE_ACCESSOR, AbstractControlDirective, NgControl, Validators, AbstractControl, FormBuilder, ValidatorFn, ValidationErrors, Validator, NG_VALIDATORS } from '@angular/forms';
 import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { format } from 'date-fns';
@@ -12,22 +12,19 @@ import { TimeFunctions } from '../api/time-functions';
   selector: 'input[appTimeInput]',
   standalone: true,
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: TimeInputDirective,
-      multi: true
-    }
+    { provide: NG_VALUE_ACCESSOR, useExisting: TimeInputDirective, multi: true },
+    { provide: NG_VALIDATORS, useExisting: TimeInputDirective, multi: true }
   ]
 })
 
-export class TimeInputDirective implements ControlValueAccessor {
+export class TimeInputDirective implements ControlValueAccessor, Validator {
   private onChange?: (value: any) => void;
   private onTouched?: () => void;
 
   @HostBinding('attr.disabled')
   protected disabled?: boolean;
 
-  private zeitValue : number = 0;
+  private zeitValue: number = 0;
 
   constructor(private readonly elementRef: ElementRef<HTMLInputElement>) { }
 
@@ -59,11 +56,13 @@ export class TimeInputDirective implements ControlValueAccessor {
     this.zeitValue = numberValue;
     console.log({ zeitValue: this.zeitValue });
 
-    this.setInputViewDateValue(outputValue);
-    this.onChange?.(numberValue);
-    // this.setInputViewDateValue(numberValue);
-    // this.writeValue(outputValue);
-    // this.writeValue(numberValue);
+    if (this.isStundenValid(stunden) && this.isMinutenValid(minuten)) {
+      this.setInputViewDateValue(outputValue);
+      this.onChange?.(numberValue);
+      // this.setInputViewDateValue(numberValue);
+      // this.writeValue(outputValue);
+      // this.writeValue(numberValue);
+    }
   }
 
   @HostListener('input', ['$event.target'])
@@ -74,10 +73,15 @@ export class TimeInputDirective implements ControlValueAccessor {
     var newValue = target.value.replace(/[^0-9:]/g, '');
     // console.log(({replace:replValue}));
 
-    // Maximallänge 5 Zeichen
+    // Maximallänge 5 Zeichen incl. Doppelpunkt
     newValue = newValue.substring(0, 5);
 
-    console.log(({ newValue: newValue }));
+    // Maximal 4 Zahlen
+    if (!newValue.includes(':')) {
+      newValue = newValue.substring(0, 4);
+    }
+
+    // console.log(({ newValue: newValue }));
 
     this.onChange?.(newValue);
     this.onTouched?.();
@@ -92,7 +96,7 @@ export class TimeInputDirective implements ControlValueAccessor {
     } else {
       this.setInputViewDateValue(TimeFunctions.formatZeit(value));
     }
-    
+
   }
 
   public registerOnChange(fn: any): void {
@@ -126,7 +130,52 @@ export class TimeInputDirective implements ControlValueAccessor {
     return number + "";
   }
 
+  public validate(control: AbstractControl): ValidationErrors | null {
+    console.log({ validate: control?.value });
+    console.log({ type: typeof (control?.value) });
+
+    var value: string = new String(control?.value).replace(':', '');
+
+    var numberValue: number = Number.parseInt(value);
+    console.log({ numberValue: numberValue });
+    if (numberValue < 100 && !this.isStundenValid(numberValue)) {
+      return { invalidStunden: { 'stunden': numberValue } }
+    }
+
+    if (numberValue < 100)
+      numberValue = numberValue * 100;
+
+    const minuten = TimeFunctions.getMinuten(numberValue);
+    // console.log({ minuten: minuten });
+
+    if (!this.isMinutenValid(minuten)) {
+      return { invalidMinuten: { 'minuten': minuten } }
+    }
+
+    return null;
+
+  }
+
+  private isStundenValid(stunden: number): boolean {
+    return stunden < 24;
+  }
+
+  private isMinutenValid(minuten: number): boolean {
+    return minuten < 60;
+  }
+
 }
+
+// function customValidator(minLength: number): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     const value = control.value;
+//     if (!value || value.length < minLength) {
+//       return { 'minlength': { 'requiredLength': minLength, 'actualLength': value ? value.length : 0 } };
+//     }
+//     return null;
+//   };
+// }
+
 
 /*
 // Versuch von: https://material.angular.io/guide/creating-a-custom-form-field-control

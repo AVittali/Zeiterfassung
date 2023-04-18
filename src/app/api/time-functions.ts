@@ -39,11 +39,11 @@ export class TimeFunctions {
         return datum;
     }
 
-    private static getStunden(zeitValue: number): number {
+    public static getStunden(zeitValue: number): number {
         return Math.floor(zeitValue / 100);
     }
 
-    private static getMinuten(zeitValue: number): number {
+    public static getMinuten(zeitValue: number): number {
         return zeitValue % 100;
     }
 
