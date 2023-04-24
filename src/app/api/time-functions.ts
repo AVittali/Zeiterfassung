@@ -1,4 +1,4 @@
-import { differenceInHours } from "date-fns";
+import { differenceInHours, differenceInMinutes } from "date-fns";
 
 export class TimeFunctions {
 
@@ -19,7 +19,8 @@ export class TimeFunctions {
         datumBis.setHours(this.getStunden(bis));
         datumBis.setMinutes(this.getMinuten(bis));
 
-        var bruttoArbeitszeit = differenceInHours(datumBis, datumVon);
+        // In Minuten umrechnen, damit Nachkommastellen stimmen
+        var bruttoArbeitszeit = differenceInMinutes(datumBis, datumVon) / 60;
         var pauseInStunden = pause / 60;
         return bruttoArbeitszeit - pauseInStunden;
 
