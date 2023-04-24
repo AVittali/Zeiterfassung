@@ -32,27 +32,31 @@ export class TimeInputDirective implements ControlValueAccessor, Validator {
   protected onInputChange(target: HTMLInputElement) {
     console.log({ "onBlur": target.value });
 
-    var inputValue = target.value;
+    // Der durch die Aufbereitung vorhandene Doppelpunkt ggf. entfernen
+    var inputValue = target.value.replace(':', '');
     if (inputValue == null) {
       return;
     }
 
-    console.log({ "inputValue": inputValue });
+    // console.log({ "inputValue": inputValue });
     if (inputValue == "") {
       this.setInputViewDateValue("");
       return;
     }
 
-    var numberValue: number = Number.parseInt(inputValue.replace(":", ""));
-    console.log({ numberValue: numberValue });
-    if (numberValue < 100) {
-      numberValue = numberValue * 100;
+    // Wenn eine zweistellige Zahl eingegeben wurde, müssen die Minuten ergänzt werden,
+    // so dass es sich um eine volle Stunden handelt.
+    if (inputValue.length < 3) {
+      inputValue = inputValue + "00";
     }
+
+    var numberValue: number = Number.parseInt(inputValue);
+    console.log({ "blur: numberValue": numberValue });
 
     var stunden = Math.floor(numberValue / 100);
     var minuten = numberValue % 100;
     var outputValue = this.formatNumber(stunden) + ":" + this.formatNumber(minuten);
-    console.log({ outputValue: outputValue });
+    // console.log({ outputValue: outputValue });
     this.zeitValue = numberValue;
     console.log({ zeitValue: this.zeitValue });
 
@@ -69,17 +73,13 @@ export class TimeInputDirective implements ControlValueAccessor, Validator {
   public onInput(target: HTMLInputElement) {
     // console.log({ onInput: target.value });
 
-    // Alle Zeichen außer Zahlen und den Doppelpunkt entfernen
-    var newValue = target.value.replace(/[^0-9:]/g, '');
+    // Alle Zeichen außer Zahlen entfernen
+    // var newValue = target.value.replace(/[^0-9:]/g, ''); // Früher war Doppelpunkt auch erlaubt
+    var newValue = target.value.replace(/[^0-9]/g, '');
     // console.log(({replace:replValue}));
 
-    // Maximallänge 5 Zeichen incl. Doppelpunkt
-    newValue = newValue.substring(0, 5);
-
-    // Maximal 4 Zahlen
-    if (!newValue.includes(':')) {
-      newValue = newValue.substring(0, 4);
-    }
+    // Maximallänge 4 Zeichen erlaubt
+    newValue = newValue.substring(0, 4);
 
     // console.log(({ newValue: newValue }));
 
@@ -132,21 +132,36 @@ export class TimeInputDirective implements ControlValueAccessor, Validator {
 
   public validate(control: AbstractControl): ValidationErrors | null {
     console.log({ validate: control?.value });
-    console.log({ type: typeof (control?.value) });
+    // console.log({ type: typeof (control?.value) });
 
-    var value: string = new String(control?.value).replace(':', '');
+    var stringValue: string = control?.value;
+    // console.log({ stringValue: stringValue });
 
-    var numberValue: number = Number.parseInt(value);
-    console.log({ numberValue: numberValue });
-    if (numberValue < 100 && !this.isStundenValid(numberValue)) {
-      return { invalidStunden: { 'stunden': numberValue } }
-    }
+    var numberValue: number = Number.parseInt(stringValue);
+    var stunden: number = 0;
 
-    if (numberValue < 100)
+    // Reine Stundenangabe: Besonderheit führende Nullen für 0:xx Uhr
+
+    console.log({ stringValueLength: stringValue.length });
+    // TODO Muss der Block noch so sein?
+    if (numberValue < 100 && stringValue.length < 3) {
+      // Angabe von vollen Stunden --> Wert muss * 100 genommen werden
       numberValue = numberValue * 100;
+      stunden = TimeFunctions.getStunden(numberValue);
+    } else if (numberValue < 100) {
+      // 0:xx Uhr 
+      stunden = 0;
+    } else {
+      // Stunden ermitteln
+      stunden = TimeFunctions.getStunden(numberValue);
+    }
 
     const minuten = TimeFunctions.getMinuten(numberValue);
     // console.log({ minuten: minuten });
+
+    if (!this.isStundenValid(stunden)) {
+      return { invalidStunden: { 'stunden': stunden } }
+    }
 
     if (!this.isMinutenValid(minuten)) {
       return { invalidMinuten: { 'minuten': minuten } }

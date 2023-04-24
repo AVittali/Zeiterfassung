@@ -38,6 +38,9 @@
         <mat-error *ngIf="detailsForm.get('bis')?.hasError('invalidMinuten')">
           Minuten {{detailsForm.get('bis')?.getError('invalidMinuten').minuten }} ungültig
         </mat-error>
+        <!-- <mat-error *ngIf="detailsForm.get('bis')?.hasError('invalidRange')">
+          Von muss kleiner Bis sein
+        </mat-error> -->
       </mat-form-field>
       <!--
       <input appTimeInput formControlName="von">

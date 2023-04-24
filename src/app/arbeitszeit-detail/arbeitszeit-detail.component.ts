@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { Arbeitszeit } from '../arbeitszeit/arbeitszeit';
 import { ArbeitszeitDataService } from '../storage/arbeitszeit-data.service';
 import { MatFormField } from '@angular/material/form-field';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, ValidationErrors, Validator, Validators } from '@angular/forms';
 import { OrtDataService } from '../storage/ort-data.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrtDialog } from '../ort/ort-dialog';
@@ -39,7 +39,26 @@ export class ArbeitszeitDetailComponent implements OnInit {
     private location: Location,
     private formBuilder: FormBuilder,
     private dialog: MatDialog
-  ) { }
+  ) {
+    // this.detailsForm.controls.von.valueChanges.subscribe(() => {
+    //   var { von, bis } = this.detailsForm.value;
+    //   if (von != null && bis != null && von > bis) {
+    //     this.detailsForm.controls.bis.setErrors({ invalidRange: true });
+    //   } else {
+    //     this.detailsForm.controls.bis.setErrors(null);
+    //   }
+    // });
+
+    // this.detailsForm.controls.bis.valueChanges.subscribe(() => {
+    //   var { von, bis } = this.detailsForm.value;
+    //   if (von != null && bis != null && von > bis) {
+    //     this.detailsForm.controls.bis.setErrors({ invalidRange: true });
+    //   } else {
+    //     this.detailsForm.controls.bis.setErrors(null);
+    //   }
+    // });
+
+  }
 
   ngOnInit(): void {
     this.getArbeitszeit();
@@ -92,6 +111,12 @@ export class ArbeitszeitDetailComponent implements OnInit {
     // const von = this.detailsForm.controls.von.zeitvalue;
     // const bis = this.detailsForm.controls.bis.value;
     if (datum == null || von == null || bis == null || stundenlohn == null) {
+      return;
+    }
+
+    // Von-Bis-Prüfung
+    // TODO Fehlermeldung
+    if (von >= bis) {
       return;
     }
 
